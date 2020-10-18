@@ -32,7 +32,7 @@ path = r"/Users/jhoff/Universität St.Gallen/STUD-Capstoneproject Tell 6 - Doku
 # Giovanni Path
 path = r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/Coding"
 # Leo Path
-path = "some ugly mac book path"
+path = r"/Users/Leonidas/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/Coding"
 
 ################################################################################################################
 # Loading Data
