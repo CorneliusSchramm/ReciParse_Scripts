@@ -39,4 +39,4 @@ with open(test_file_path) as f:
     first_record = f.readline() 
     
 print(first_record)
-print("Hallo Jona, wie gehts?")
+print("Hallo Jona, wie gehts? top")
