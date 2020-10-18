@@ -38,7 +38,9 @@ path = r"/Users/Leonidas/Universität St.Gallen/STUD-Capstoneproject Tell 6 - G
 # Loading Data
 ################################################################################################################
 
-test_file_path = os.path.join(path,"1-Data", 'test_data.txt')
+file_name = ""
+
+test_file_path = os.path.join(path,"1-Data", file_name)
 
 with open(test_file_path) as f:
     first_record = f.readline() 
