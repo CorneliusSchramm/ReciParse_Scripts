@@ -24,10 +24,10 @@ import spacy
 
 # print(os.getcwd()) 
 # os.chdir("Change to your path if necessary")
-coco_path = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\Coding"
-jona_path = r"/Users/jhoff/Universität St.Gallen/STUD-Capstoneproject Tell 6 - Dokumente/General/Coding"
-jonathan_path = r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/Coding"
-leo_path = "some ugly mac book path"
+path = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\Coding"
+path = r"/Users/jhoff/Universität St.Gallen/STUD-Capstoneproject Tell 6 - Dokumente/General/Coding"
+path = r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/Coding"
+path = "some ugly mac book path"
 
 ################################################################################################################
 # Loading Data
