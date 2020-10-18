@@ -24,16 +24,21 @@ import spacy
 
 # print(os.getcwd()) 
 # os.chdir("Change to your path if necessary")
+
+# Coco Path
 path = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\Coding"
+# Jona Path
 path = r"/Users/jhoff/Universität St.Gallen/STUD-Capstoneproject Tell 6 - Dokumente/General/Coding"
+# Giovanni Path
 path = r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/Coding"
+# Leo Path
 path = "some ugly mac book path"
 
 ################################################################################################################
 # Loading Data
 ################################################################################################################
 
-test_file_path = os.path.join(coco_path,"1-Data", 'test_data.txt')
+test_file_path = os.path.join(path,"1-Data", 'test_data.txt')
 
 with open(test_file_path) as f:
     first_record = f.readline() 
