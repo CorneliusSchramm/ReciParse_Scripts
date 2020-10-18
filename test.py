@@ -24,22 +24,10 @@ import spacy
 
 # print(os.getcwd()) 
 # os.chdir("Change to your path if necessary")
-<<<<<<< Updated upstream
 coco_path = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\Coding"
 jona_path = r"/Users/jhoff/Universität St.Gallen/STUD-Capstoneproject Tell 6 - Dokumente/General/Coding"
 jonathan_path = r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/Coding"
 leo_path = "some ugly mac book path"
-=======
-
-# Coco
-# path = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\Coding"
-# Jona
-# path = r"/Users/jhoff/Universität St.Gallen/STUD-Capstoneproject Tell 6 - Dokumente/General/Coding"
-# Giovanni
-# path = r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General"
-# Leo
-path = r"/Users/Leonidas/Universität St.Gallen/Capstone Tell 6/Coding"
->>>>>>> Stashed changes
 
 ################################################################################################################
 # Loading Data
