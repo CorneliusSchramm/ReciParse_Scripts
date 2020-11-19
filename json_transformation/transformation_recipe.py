@@ -1,13 +1,23 @@
+# Copied Code from Website
 import prodigy
 
 @prodigy.recipe(
-    "my-custom-recipe",
+    "transform_rel2ner",
     dataset=("Dataset to save answers to", "positional", None, str),
-    view_id=("Annotation interface", "option", "v", str)
 )
-def my_custom_recipe(dataset, view_id="text"):
+def transform_rel2ner(dataset, input_dataset):
     # Load your own streams from anywhere you want
     stream = load_my_custom_stream()
+
+
+    # Giovannis Code
+    input_name = input_dataset
+    data_input = []
+    with open(path + '/' + input_name) as f:    
+        for i in f:
+            data = json.loads(i)
+            data_input.append(data)
+
 
     def update(examples):
         # This function is triggered when Prodigy receives annotations
@@ -24,12 +34,8 @@ def my_custom_recipe(dataset, view_id="text"):
 # --------
 
 # load input JSON into dict data_input
-input_name = "input_json.jsonl"
-data_input = []
-with open(path + '/' + input_name) as f:
-  for i in f:
-    data = json.loads(i)
-    data_input.append(data)
+
+
 
 # Keys in output json
 output_keys = ["text", "_input_hash", "_task_hash", "tokens", "_session_id", "_view_id", "spans", "answer"]
