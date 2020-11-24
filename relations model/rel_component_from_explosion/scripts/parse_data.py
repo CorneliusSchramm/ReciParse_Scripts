@@ -11,11 +11,9 @@ msg = Printer()
 
 SYMM_LABELS = ["Binds"]
 MAP_LABELS = {
-    "Pos-Reg": "Regulates",
-    "Neg-Reg": "Regulates",
-    "Reg": "Regulates",
-    "No-rel": "Regulates",
-    "Binds": "Binds",
+    "ARG0": "ARG0",
+    "ARG1": "ARG1",
+    "ARG": "ARG",
 }
 
 
@@ -29,7 +27,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
     count_all = {"train": 0, "dev": 0, "test": 0}
     count_pos = {"train": 0, "dev": 0, "test": 0}
 
-    with json_loc.open("r", encoding="utf8") as jsonfile:
+    with json_loc.open("r", encoding="utf16") as jsonfile:
         for line in jsonfile:
             example = json.loads(line)
             span_starts = set()
