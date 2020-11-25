@@ -88,7 +88,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path): #tr
                                     neg += 1
                                     rels[(x1, x2)][label] = 0.0
                     doc._.rel = rels
-
+"""
                     # only keeping documents with at least 1 positive case
                     if pos > 0:
                         # use the original PMID/PMCID to decide on train/dev/test split
@@ -111,6 +111,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path): #tr
                             docs["train"].append(doc)
                             count_pos["train"] += pos
                             count_all["train"] += pos + neg
+                            """
                 except KeyError as e:
                     msg.fail(f"Skipping doc because of key error: {e} in {example['meta']['source']}")
 
