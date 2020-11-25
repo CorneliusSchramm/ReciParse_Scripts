@@ -114,12 +114,12 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
                         #eigener Ansatz über _input_hash
                         article_id = example["_input_hash"] # select input_hash
                         article_id = int(str(article_id)[3:4]) # get one digit from input hash
-                        if article_id in [0,1,2,3]:
+                        if article_id in [0,1,2,3,4,5]:
                             ids["dev"].add(article_id)
                             docs["dev"].append(doc)
                             count_pos["dev"] += pos
                             count_all["dev"] += pos + neg
-                        elif article_id in [4,5,6]:
+                        elif article_id in [6,7]:
                             ids["test"].add(article_id)
                             docs["test"].append(doc)
                             count_pos["test"] += pos
@@ -154,7 +154,6 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
         f"{len(docs['test'])} test sentences from {len(ids['test'])} articles, "
         f"{count_pos['test']}/{count_all['test']} pos instances."
     )
-
 
 if __name__ == "__main__":
     typer.run(main)

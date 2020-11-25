@@ -224,3 +224,7 @@ def score_relations(examples: Iterable[Example], threshold: float) -> Dict[str, 
         "rel_micro_r": micro_prf.recall,
         "rel_micro_f": micro_prf.fscore,
     }
+
+# import spacy
+# nlp = spacy.blank("de")
+# nlp.add_pipe("relation_extractor")

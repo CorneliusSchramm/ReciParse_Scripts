@@ -4,7 +4,7 @@ from pathlib import Path
 import spacy
 from spacy.tokens import DocBin, Doc
 from spacy.training.example import Example
-
+import pickle
 # make the factory work
 from rel_pipe import make_relation_extractor, score_relations
 
@@ -13,7 +13,7 @@ from rel_model import create_relation_model, create_classification_layer, create
 
 
 def main(trained_pipeline: Path, test_data: Path, print_details: bool):
-    print_details = True # hinzugefügt
+    print_details = False # hinzutrained_pipelinegefügt
     nlp = spacy.load(trained_pipeline)
     print(f"Piplines are: {nlp.pipe_names}") # Coco hinzugefügt
 
@@ -21,6 +21,13 @@ def main(trained_pipeline: Path, test_data: Path, print_details: bool):
     docs = doc_bin.get_docs(nlp.vocab)
     examples = []
     for gold in docs:
+        #-------------------------------------------------------
+        # print(gold.to_json()) #hinzugefügt
+        # print(type(gold)) # hinzugefügt
+        # with open('MYDOC.pickle', 'wb') as handle:
+        #     pickle.dump(gold, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        # break # hinzugefügt
+        # -------------------------------------------------------
         pred = Doc(
             nlp.vocab,
             words=[t.text for t in gold],
@@ -28,6 +35,7 @@ def main(trained_pipeline: Path, test_data: Path, print_details: bool):
         )
         pred.ents = gold.ents
         for name, proc in nlp.pipeline:
+            # print(name,proc)
             pred = proc(pred)
         examples.append(Example(pred, gold))
         # print(f"Here is instance of the examples_list {examples[0]}. \n It is of type {type(examples[0])}") #hinzugefügt
