@@ -223,3 +223,20 @@ def score_relations(examples: Iterable[Example], threshold: float) -> Dict[str, 
         "rel_micro_r": micro_prf.recall,
         "rel_micro_f": micro_prf.fscore,
     }
+
+"""
+from spacy.lang.en import English
+
+from rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
+
+
+
+nlp = English()
+
+print(nlp.pipeline)
+
+nlp.add_pipe("tok2vec")
+
+print(nlp.pipeline)
+
+nlp.add_pipe("relation_extractor")"""
