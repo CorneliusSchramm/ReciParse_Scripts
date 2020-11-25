@@ -29,7 +29,7 @@ msg = Printer()
     },
 )
 def make_relation_extractor(
-    nlp: Language, name: str, model: Model, *, threshold: float
+    nlp: Language, name: str, model: Model, *, threshold: 0.3
 ):
     """Construct a RelationExtractor component."""
     return RelationExtractor(nlp.vocab, model, name, threshold=threshold)
