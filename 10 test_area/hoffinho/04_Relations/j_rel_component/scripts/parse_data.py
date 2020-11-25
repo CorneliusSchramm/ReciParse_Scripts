@@ -19,23 +19,27 @@ MAP_LABELS = {
 }
 
 
-def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
+def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path): #train_file, development_file, test_file
     """Creating the corpus from the Prodigy annotations."""
     Doc.set_extension("rel", default={})
     vocab = Vocab()
 
-    docs = {"train": [], "dev": [], "test": []}
+    docs = {"train": [], "dev": [], "test": []} #dictionary used to create files
+    
     ids = {"train": set(), "dev": set(), "test": set()}
     count_all = {"train": 0, "dev": 0, "test": 0}
     count_pos = {"train": 0, "dev": 0, "test": 0}
 
-    with json_loc.open("r", encoding="utf8") as jsonfile:
-        for line in jsonfile:
+    with json_loc.open("r", encoding="utf8") as jsonfile: 
+        
+        for line in jsonfile:               #für jedes einzelne doc (jsonfile = list of docs(?))
             example = json.loads(line)
             span_starts = set()
+            
             if example["answer"] == "accept":
                 neg = 0
                 pos = 0
+
                 try:
                     # Parse the tokens
                     words = [t["text"] for t in example["tokens"]]
@@ -110,8 +114,9 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
                 except KeyError as e:
                     msg.fail(f"Skipping doc because of key error: {e} in {example['meta']['source']}")
 
+
     docbin = DocBin(docs=docs["train"], store_user_data=True)
-    docbin.to_disk(train_file)
+    docbin.to_disk(train_file)      #path where train_file is saved
     msg.info(
         f"{len(docs['train'])} training sentences from {len(ids['train'])} articles, "
         f"{count_pos['train']}/{count_all['train']} pos instances."
