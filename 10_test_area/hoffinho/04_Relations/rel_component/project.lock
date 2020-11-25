@@ -1,0 +1,17 @@
+data:
+  cmd: python -m spacy run data
+  script:
+    - python ./scripts/parse_data.py assets/annotations.jsonl data/train.spacy data/dev.spacy
+      data/test.spacy
+  deps:
+    - path: assets/annotations.jsonl
+      md5: 82bb4d1828057a91dd86085f70fb4991
+  outs:
+    - path: data/train.spacy
+      md5: 1b4057d3c6a8e1961f3c30903135b259
+    - path: data/dev.spacy
+      md5: adf8e5fde0d01399859d258291cb5507
+    - path: data/test.spacy
+      md5: 9d700b743bab2e429692c0cc637cb11e
+  spacy_version: 3.0.0rc2
+  spacy_git_version: ace6ae435
