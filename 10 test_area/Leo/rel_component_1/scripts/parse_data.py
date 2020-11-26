@@ -13,6 +13,7 @@ msg = Printer()
 MAP_LABELS = {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     "ARG0": "Arg0",
     "ARG1": "Arg1",
     "ARG": "Arg",
@@ -20,6 +21,9 @@ MAP_LABELS = {
 <<<<<<< Updated upstream:10_test_area/hoffinho/04_Relations/rel_component/scripts/parse_data.py
 =======
 <<<<<<< Updated upstream:10_test_area/jonathan/explosion github/tutorials/rel_component/scripts/parse_data.py
+>>>>>>> Stashed changes
+=======
+<<<<<<< Updated upstream:10_test_area/hoffinho/04_Relations/01_old/j_rel_component/scripts/parse_data.py
 >>>>>>> Stashed changes
     "Pos-Reg": "Regulates",
     "Neg-Reg": "Regulates",
@@ -32,6 +36,7 @@ MAP_LABELS = {
     "ARG": "Arg",
 >>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/scripts/parse_data.py
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -39,15 +44,27 @@ MAP_LABELS = {
 
 
 def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
+=======
+}
+
+
+def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path): #train_file, development_file, test_file
+>>>>>>> Stashed changes
     """Creating the corpus from the Prodigy annotations."""
     Doc.set_extension("rel", default={})
     vocab = Vocab()
 
+<<<<<<< Updated upstream
     docs = {"train": [], "dev": [], "test": []}
+=======
+    docs = {"train": [], "dev": [], "test": []} #dictionary used to create files
+    
+>>>>>>> Stashed changes
     ids = {"train": set(), "dev": set(), "test": set()}
     count_all = {"train": 0, "dev": 0, "test": 0}
     count_pos = {"train": 0, "dev": 0, "test": 0}
 
+<<<<<<< Updated upstream
     with json_loc.open("r", encoding="utf8") as jsonfile:
         for line in jsonfile:
             example = json.loads(line)
@@ -55,6 +72,23 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
             if example["answer"] == "accept":
                 neg = 0
                 pos = 0
+=======
+<<<<<<< Updated upstream:10_test_area/hoffinho/04_Relations/01_old/j_rel_component/scripts/parse_data.py
+    with json_loc.open("r", encoding="utf8") as jsonfile: 
+        
+        for line in jsonfile:               #für jedes einzelne doc (jsonfile = list of docs(?))
+=======
+    with json_loc.open("r", encoding="utf8") as jsonfile:
+        for line in jsonfile:
+>>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/scripts/parse_data.py
+            example = json.loads(line)
+            span_starts = set()
+            
+            if example["answer"] == "accept":
+                neg = 0
+                pos = 0
+
+>>>>>>> Stashed changes
                 try:
                     # Parse the tokens
                     words = [t["text"] for t in example["tokens"]]
@@ -103,7 +137,11 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
                                     neg += 1
                                     rels[(x1, x2)][label] = 0.0
                     doc._.rel = rels
+<<<<<<< Updated upstream
 
+=======
+"""
+>>>>>>> Stashed changes
                     # only keeping documents with at least 1 positive case
                     ## test train dev splitter geht bei uns nicht, weil wir die Metadaten nicht haben
                     if pos > 0:
@@ -150,6 +188,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
                             docs["train"].append(doc)
                             count_pos["train"] += pos
                             count_all["train"] += pos + neg
+<<<<<<< Updated upstream
 
 
                 except KeyError as e:
@@ -157,6 +196,20 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
 
     docbin = DocBin(docs=docs["train"], store_user_data=True)
     docbin.to_disk(train_file)
+=======
+<<<<<<< Updated upstream:10_test_area/hoffinho/04_Relations/01_old/j_rel_component/scripts/parse_data.py
+                            """
+=======
+
+
+>>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/scripts/parse_data.py
+                except KeyError as e:
+                    msg.fail(f"Skipping doc because of key error: {e} in {example['_input_hash']}")
+
+
+    docbin = DocBin(docs=docs["train"], store_user_data=True)
+    docbin.to_disk(train_file)      #path where train_file is saved
+>>>>>>> Stashed changes
     msg.info(
         f"{len(docs['train'])} training sentences from {len(ids['train'])} articles, "
         f"{count_pos['train']}/{count_all['train']} pos instances."

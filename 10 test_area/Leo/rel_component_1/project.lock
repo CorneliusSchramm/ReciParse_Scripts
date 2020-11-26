@@ -7,6 +7,7 @@ data:
     - path: assets/batch1all120.jsonl
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       md5: 30ab60337539032dc3f43246709ce005
 =======
 <<<<<<< Updated upstream:10 test_area/jonathan/explosion github/tutorials/rel_component_2/project.lock
@@ -14,6 +15,9 @@ data:
 =======
       md5: 30ab60337539032dc3f43246709ce005
 >>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/project.lock
+>>>>>>> Stashed changes
+=======
+      md5: 30ab60337539032dc3f43246709ce005
 >>>>>>> Stashed changes
 =======
       md5: 30ab60337539032dc3f43246709ce005
@@ -41,6 +45,7 @@ train_cpu:
     - path: training/model-best
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       md5: 3da7fe43702100fc950742712231ea90
 =======
 <<<<<<< Updated upstream:10 test_area/jonathan/explosion github/tutorials/rel_component_2/project.lock
@@ -55,6 +60,9 @@ train_cpu:
 =======
       md5: 3da7fe43702100fc950742712231ea90
 >>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/project.lock
+>>>>>>> Stashed changes
+=======
+      md5: 3da7fe43702100fc950742712231ea90
 >>>>>>> Stashed changes
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
@@ -66,6 +74,7 @@ evaluate:
     - path: training/model-best
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 <<<<<<< Updated upstream:10 test_area/jonathan/explosion github/tutorials/rel_component_2/project.lock
       md5: ae033cd20a11fcd22b6f6348e9c2a8ec
@@ -78,6 +87,8 @@ evaluate:
       md5: 99c19ceca36f1264aed96858c905653f
     - path: data/test.spacy
       md5: 874cd5f281129e61f1c2dff7b933d79d
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
       md5: 3da7fe43702100fc950742712231ea90
@@ -97,11 +108,14 @@ custom:
       md5: 874cd5f281129e61f1c2dff7b933d79d
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 >>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/project.lock
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/project.lock
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   outs: []
   spacy_version: 3.0.0rc2
