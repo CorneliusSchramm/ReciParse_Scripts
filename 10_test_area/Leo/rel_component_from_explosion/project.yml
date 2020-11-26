@@ -3,7 +3,7 @@ description: "This example project shows how to implement a spaCy component with
 
 # Variables can be referenced across the project.yml using ${vars.var_name}
 vars:
-  annotations: "assets/annotations.jsonl"
+  annotations: "assets/batch1all120.jsonl"
   tok2vec_config: "configs/rel_tok2vec.cfg"
   trf_config: "configs/rel_trf.cfg"
   train_file: "data/train.spacy"
