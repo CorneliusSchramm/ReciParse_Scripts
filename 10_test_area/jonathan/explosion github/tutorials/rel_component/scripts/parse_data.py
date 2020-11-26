@@ -9,13 +9,19 @@ from wasabi import Printer
 
 msg = Printer()
 
-SYMM_LABELS = ["Binds"]
+#SYMM_LABELS = ["Binds"]
 MAP_LABELS = {
+<<<<<<< Updated upstream:10_test_area/jonathan/explosion github/tutorials/rel_component/scripts/parse_data.py
     "Pos-Reg": "Regulates",
     "Neg-Reg": "Regulates",
     "Reg": "Regulates",
     "No-rel": "Regulates",
     "Binds": "Binds",
+=======
+    "ARG0": "Arg0",
+    "ARG1": "Arg1",
+    "ARG": "Arg",
+>>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/scripts/parse_data.py
 }
 
 
@@ -71,10 +77,10 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
                         if label not in rels[(start, end)]:
                             rels[(start, end)][label] = 1.0
                             pos += 1
-                        if label in SYMM_LABELS:
-                            if label not in rels[(end, start)]:
-                                rels[(end, start)][label] = 1.0
-                                pos += 1
+                        #if label in SYMM_LABELS:
+                            #if label not in rels[(end, start)]:
+                                #rels[(end, start)][label] = 1.0
+                                #pos += 1
 
                     # The annotation is complete, so fill in zero's where the data is missing
                     for x1 in span_starts:
@@ -86,18 +92,42 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
                     doc._.rel = rels
 
                     # only keeping documents with at least 1 positive case
+                    ## test train dev splitter geht bei uns nicht, weil wir die Metadaten nicht haben
                     if pos > 0:
                         # use the original PMID/PMCID to decide on train/dev/test split
-                        article_id = example["meta"]["source"]
-                        article_id = article_id.replace("BioNLP 2011 Genia Shared Task, ", "")
-                        article_id = article_id.replace(".txt", "")
-                        article_id = article_id.split("-")[1]
-                        if article_id.endswith("4"):
+                        #article_id = example["meta"]["source"]
+                        #article_id = article_id.replace("BioNLP 2011 Genia Shared Task, ", "")
+                        #article_id = article_id.replace(".txt", "")
+                        #article_id = article_id.split("-")[1]
+                        # "BioNLP 2011 Genia Shared Task, PMC-1134658-00-TIAB.txt" –> "1134658"
+                        # article_id = "1134658"
+
+                        #if article_id.endswith("4"):
+                            #ids["dev"].add(article_id)
+                            #docs["dev"].append(doc)
+                            #count_pos["dev"] += pos
+                            #count_all["dev"] += pos + neg
+                        #elif article_id.endswith("3"):
+                            #ids["test"].add(article_id)
+                            #docs["test"].append(doc)
+                            #count_pos["test"] += pos
+                            #count_all["test"] += pos + neg
+                        #else:
+                            #ids["train"].add(article_id)
+                            #docs["train"].append(doc)
+                            #count_pos["train"] += pos
+                            #count_all["train"] += pos + neg
+
+
+                        #eigener Ansatz über _input_hash
+                        article_id = example["_input_hash"] # select input_hash
+                        article_id = int(str(article_id)[3:4]) # get one digit from input hash
+                        if article_id in [0,1,2,3]:
                             ids["dev"].add(article_id)
                             docs["dev"].append(doc)
                             count_pos["dev"] += pos
                             count_all["dev"] += pos + neg
-                        elif article_id.endswith("3"):
+                        elif article_id in [4,5,6]:
                             ids["test"].add(article_id)
                             docs["test"].append(doc)
                             count_pos["test"] += pos
@@ -107,8 +137,10 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path):
                             docs["train"].append(doc)
                             count_pos["train"] += pos
                             count_all["train"] += pos + neg
+
+
                 except KeyError as e:
-                    msg.fail(f"Skipping doc because of key error: {e} in {example['meta']['source']}")
+                    msg.fail(f"Skipping doc because of key error: {e} in {example['_input_hash']}")
 
     docbin = DocBin(docs=docs["train"], store_user_data=True)
     docbin.to_disk(train_file)
