@@ -11,9 +11,23 @@ msg = Printer()
 
 #SYMM_LABELS = ["Binds"]
 MAP_LABELS = {
+<<<<<<< Updated upstream
     "ARG0": "Arg0",
     "ARG1": "Arg1",
     "ARG": "Arg",
+=======
+<<<<<<< Updated upstream:10_test_area/hoffinho/04_Relations/rel_component/scripts/parse_data.py
+    "Pos-Reg": "Regulates",
+    "Neg-Reg": "Regulates",
+    "Reg": "Regulates",
+    "No-rel": "Regulates",
+    "Binds": "Binds",
+=======
+    "ARG0": "Arg0",
+    "ARG1": "Arg1",
+    "ARG": "Arg",
+>>>>>>> Stashed changes:10 test_area/Leo/rel_component_1/scripts/parse_data.py
+>>>>>>> Stashed changes
 }
 
 
