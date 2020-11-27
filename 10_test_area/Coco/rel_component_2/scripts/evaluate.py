@@ -4,7 +4,7 @@ from pathlib import Path
 import spacy
 from spacy.tokens import DocBin, Doc
 from spacy.training.example import Example
-
+import pickle
 # make the factory work
 from rel_pipe import make_relation_extractor, score_relations
 
@@ -13,12 +13,21 @@ from rel_model import create_relation_model, create_classification_layer, create
 
 
 def main(trained_pipeline: Path, test_data: Path, print_details: bool):
+    print_details = False # hinzutrained_pipelinegefügt
     nlp = spacy.load(trained_pipeline)
+    print(f"Piplines are: {nlp.pipe_names}") # Coco hinzugefügt
 
     doc_bin = DocBin(store_user_data=True).from_disk(test_data)
     docs = doc_bin.get_docs(nlp.vocab)
     examples = []
     for gold in docs:
+        #-------------------------------------------------------
+        # print(gold.to_json()) #hinzugefügt
+        # print(type(gold)) # hinzugefügt
+        # with open('MYDOC.pickle', 'wb') as handle:
+        #     pickle.dump(gold, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        # break # hinzugefügt
+        # -------------------------------------------------------
         pred = Doc(
             nlp.vocab,
             words=[t.text for t in gold],
@@ -26,14 +35,15 @@ def main(trained_pipeline: Path, test_data: Path, print_details: bool):
         )
         pred.ents = gold.ents
         for name, proc in nlp.pipeline:
+            # print(name,proc)
             pred = proc(pred)
         examples.append(Example(pred, gold))
-
+        # print(f"Here is instance of the examples_list {examples[0]}. \n It is of type {type(examples[0])}") #hinzugefügt
         # Print the gold and prediction, if gold label is not 0
         if print_details:
             print()
             print(f"Text: {gold.text}")
-            print(f"spans: {[(e.start, e.text, e.label_) for e in pred.ents]}")
+            print(f"spans: {[(e.start,e.end, e.text, e.label_) for e in pred.ents]}")
             for value, rel_dict in pred._.rel.items():
                 gold_labels = [k for (k, v) in gold._.rel[value].items() if v == 1.0]
                 if gold_labels:
@@ -41,7 +51,7 @@ def main(trained_pipeline: Path, test_data: Path, print_details: bool):
                         f" pair: {value} --> gold labels: {gold_labels} --> predicted values: {rel_dict}"
                     )
             print()
-
+    
     random_examples = []
     docs = doc_bin.get_docs(nlp.vocab)
     for gold in docs:
@@ -60,10 +70,11 @@ def main(trained_pipeline: Path, test_data: Path, print_details: bool):
             for label in relation_extractor.labels:
                 pred._.rel[offset][label] = random.uniform(0, 1)
         random_examples.append(Example(pred, gold))
-
+    print(f"Here is instance of the random_examples list {random_examples[0]}") #hinzugefügt
     thresholds = [0.000, 0.050, 0.100, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 0.999]
     print()
-    print(pred._.rel)
+    # print(pred._.rel) # auskommentiert
+    # print("SCORE RELATIONS:\n",score_relations(examples, thresholds[6])) # Eingefügt
     print("Random baseline:")
     _score_and_format(random_examples, thresholds)
 
