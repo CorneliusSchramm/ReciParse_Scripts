@@ -246,9 +246,18 @@ nlp.initialize("relation_extractor")
 config = Config().from_disk("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_2/configs/rel_tok2vec.cfg")
 nlp = English().from_config(config)
 
+nlp.add_pipe("ner", first=True)
+
+
 print(nlp.pipe_names)
 
+confs = nlp.config
+print(confs["paths"])
+print("----")
+print(confs["initialize"])
+
+
 # TO BE FIXED
-#nlp.initialize()
+#nlp.initialize(Ex)
 doc = nlp("Das ist ein Test.")
 #print(doc._.rel)
