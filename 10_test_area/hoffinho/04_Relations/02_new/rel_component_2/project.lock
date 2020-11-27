@@ -15,3 +15,18 @@ data:
       md5: 20b9418e40d9139913f37902cef29a42
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
+train_cpu:
+  cmd: python -m spacy run train_cpu
+  script:
+    - python -m spacy train configs/rel_tok2vec.cfg --output training --paths.train
+      data/train.spacy --paths.dev data/dev.spacy -c ./scripts/custom_functions.py
+  deps:
+    - path: data/train.spacy
+      md5: f70b346ce20dd874e3ce6244b70823e1
+    - path: data/dev.spacy
+      md5: 816d942014f94adf1a78802a9a170df8
+  outs:
+    - path: training/model-best
+      md5: dc07891e6b41b305b6d6238b91c93f6d
+  spacy_version: 3.0.0rc2
+  spacy_git_version: ace6ae435

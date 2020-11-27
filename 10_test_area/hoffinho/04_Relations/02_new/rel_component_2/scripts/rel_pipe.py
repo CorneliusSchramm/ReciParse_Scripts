@@ -12,7 +12,7 @@ from spacy.vocab import Vocab
 from spacy import Language
 from thinc.model import set_dropout_rate
 from wasabi import Printer
-
+import spacy
 
 Doc.set_extension("rel", default={}, force=True)
 msg = Printer()
@@ -223,3 +223,32 @@ def score_relations(examples: Iterable[Example], threshold: float) -> Dict[str, 
         "rel_micro_r": micro_prf.recall,
         "rel_micro_f": micro_prf.fscore,
     }
+
+from pathlib import Path
+from spacy.util import load_model_from_path
+
+from thinc.api import Config
+from spacy.language import Language
+from rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
+from spacy.vocab import Vocab
+from spacy.lang.en import English
+
+#loaded_model = spacy.load("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_2/training/model-best")
+
+"""nlp = spacy.load("en_core_web_sm")
+nlp.add_pipe("relation_extractor", last=True, config={"model": {"@architectures": "rel_model.v1", "@architectures" : "rel_instance_tensor.v1", "@architectures" : "rel_classification_layer.v1"}, "threshold": 0.5})
+print(nlp.pipe_names)
+nlp.initialize("relation_extractor")
+#doc = nlp("Das ist ein Test.")"""
+
+
+# NEW APPROACH
+config = Config().from_disk("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_2/configs/rel_tok2vec.cfg")
+nlp = English().from_config(config)
+
+print(nlp.pipe_names)
+
+# TO BE FIXED
+#nlp.initialize()
+doc = nlp("Das ist ein Test.")
+#print(doc._.rel)
