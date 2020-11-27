@@ -234,8 +234,8 @@ from spacy.vocab import Vocab
 from spacy.lang.en import English
 
 #loaded_model = spacy.load("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_2/training/model-best")
-
-"""nlp = spacy.load("en_core_web_sm")
+"""
+nlp = spacy.load("en_core_web_sm")
 nlp.add_pipe("relation_extractor", last=True, config={"model": {"@architectures": "rel_model.v1", "@architectures" : "rel_instance_tensor.v1", "@architectures" : "rel_classification_layer.v1"}, "threshold": 0.5})
 print(nlp.pipe_names)
 nlp.initialize("relation_extractor")
@@ -259,5 +259,5 @@ print(confs["initialize"])
 
 # TO BE FIXED
 #nlp.initialize(Ex)
-doc = nlp("Das ist ein Test.")
+#doc = nlp("Das ist ein Test.")
 #print(doc._.rel)
