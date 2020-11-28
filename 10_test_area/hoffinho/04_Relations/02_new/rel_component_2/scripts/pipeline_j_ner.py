@@ -11,5 +11,4 @@ nlp = spacy.load("de_core_news_sm")
 print(nlp.pipeline)
 print(nlp.pipe_names)
 
-
-
+print(nlp.config.to_str())

@@ -241,6 +241,9 @@ print(nlp.pipe_names)
 nlp.initialize("relation_extractor")
 #doc = nlp("Das ist ein Test.")"""
 
+nlp = spacy.blank("en")
+nlp.add_pipe("relation_extractor")
+
 
 # NEW APPROACH
 config = Config().from_disk("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_2/configs/rel_tok2vec.cfg")
