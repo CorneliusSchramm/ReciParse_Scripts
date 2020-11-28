@@ -48,9 +48,9 @@ custom:
     - python ./scripts/pipeline.py training/model-ner training/model-best assets/input.json
   deps:
     - path: training/model-ner
-      md5: 3740f005edd5c6b74ef42bd770d8368b
+      md5: 667205c36d9d95c84868d99ee807e414
     - path: training/model-best
-      md5: 1cc87a57461cfbba66e3e308c2ff8112
+      md5: 089ba5c98640d01d95458ff6d938e7e5
     - path: assets/input.json
       md5: c06b4ac81a13d9e727cef61441f57d35
   outs: []
