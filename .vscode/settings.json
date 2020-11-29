@@ -1,4 +1,4 @@
 {
     "jupyter.jupyterServerType": "local",
-    "python.pythonPath": "/Users/jhoff/Desktop/spacy-nn-env"
+    "python.pythonPath": "/opt/anaconda3/envs/nightly-env/bin/python"
 }

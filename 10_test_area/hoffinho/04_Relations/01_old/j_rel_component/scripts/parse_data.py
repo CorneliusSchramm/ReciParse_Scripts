@@ -88,7 +88,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path): #tr
                                     neg += 1
                                     rels[(x1, x2)][label] = 0.0
                     doc._.rel = rels
-"""
+
                     # only keeping documents with at least 1 positive case
                     if pos > 0:
                         # use the original PMID/PMCID to decide on train/dev/test split
@@ -101,22 +101,41 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path): #tr
                             docs["dev"].append(doc)
                             count_pos["dev"] += pos
                             count_all["dev"] += pos + neg
+                            for rel in doc._.rel: 
+                                print(rel,"-->", rels[rel])
+                            ents = [(e.text, e.start_char, e.end_char, e.label_) for e in doc.ents]
+                            print(ents)
+
+                            break
                         elif article_id.endswith("3"):
                             ids["test"].add(article_id)
                             docs["test"].append(doc)
                             count_pos["test"] += pos
                             count_all["test"] += pos + neg
+                            for rel in doc._.rel: 
+                                print(rel,"-->", rels[rel])
+                            ents = [(e.text, e.start_char, e.end_char, e.label_) for e in doc.ents]
+                            print(ents)
+
+                            break
                         else:
                             ids["train"].add(article_id)
                             docs["train"].append(doc)
                             count_pos["train"] += pos
                             count_all["train"] += pos + neg
-                            """
+                            for rel in doc._.rel: 
+                                print(rel,"-->", rels[rel])
+                            ents = [(e.text, e.start_char, e.end_char, e.label_) for e in doc.ents]
+                            print(ents)
+                            break
+                             
                 except KeyError as e:
                     msg.fail(f"Skipping doc because of key error: {e} in {example['meta']['source']}")
 
 
+
     docbin = DocBin(docs=docs["train"], store_user_data=True)
+    docbin.to_disk("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/data_own/gold_standard_example.json")
     docbin.to_disk(train_file)      #path where train_file is saved
     msg.info(
         f"{len(docs['train'])} training sentences from {len(ids['train'])} articles, "

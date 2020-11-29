@@ -98,22 +98,39 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                             docs["train"].append(doc)
                             count_pos["train"] += pos
                             count_all["train"] += pos + neg
-                        
+                            for rel in doc._.rel: 
+                                print(rel,"-->", rels[rel])
+                            ents = [(e.text, e.start_char, e.end_char, e.label_) for e in doc.ents]
+                            print(ents)
+
+                            break
                         elif len(docs["test"]) < round(test_split*length_training_data):
                             ids["test"].add(recipe_id)
                             docs["test"].append(doc)
                             count_pos["test"] += pos
                             count_all["test"] += pos + neg
+                            for rel in doc._.rel: 
+                                print(rel,"-->", rels[rel])
 
+                            for d in doc.ent_type_:
+                                print(ent)
+                                
+                            break
                         else: 
                             ids["dev"].add(recipe_id)
                             docs["dev"].append(doc)
                             count_pos["dev"] += pos
                             count_all["dev"] += pos + neg
-                            
+                            for rel in doc._.rel: 
+                                print(rel)
+                            break                            
 
                 except KeyError as e:
                     msg.fail(f"Skipping doc because of key error: {e} in {example['_input_hash']}")
+
+        
+    docbin = DocBin(docs=docs["train"], store_user_data=True)
+    docbin.to_disk("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/data_own/gold_standard_self.json")  
 
     docbin = DocBin(docs=docs["train"], store_user_data=True)
     docbin.to_disk(train_file)
