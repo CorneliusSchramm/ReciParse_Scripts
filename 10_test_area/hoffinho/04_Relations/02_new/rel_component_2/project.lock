@@ -30,3 +30,12 @@ train_cpu:
       md5: dc07891e6b41b305b6d6238b91c93f6d
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
+clean:
+  cmd: python -m spacy run clean
+  script:
+    - rm -rf data/*
+    - rm -rf training/*
+  deps: []
+  outs: []
+  spacy_version: 3.0.0rc2
+  spacy_git_version: ace6ae435
