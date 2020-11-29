@@ -14,8 +14,9 @@ def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.4, 
 
     # Load JSONL into list
     with open(file_path, "r", encoding="utf8") as json_file:
-        data = [json.loads(line) for line in json_file if json.loads(line)["answer"]=="accept"]
-
+        # data = [json.loads(line) for line in json_file if json.loads(line)["answer"]=="accept"]
+        data = [rec for rec in json.load(json_file) if rec["answer"]== "accept"]
+        
     # Checking Length
     data_len = len(data)
     print(f"Number of accepted recipes: {len(data)}")
@@ -50,6 +51,6 @@ def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.4, 
             json.dump(data, f)
 
 train_dev_test_split (
-    input_file = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\01-Data\recipes_labeling\batch1_annotated\batch1all120.jsonl",
+    input_file = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\01-Data\recipes_labeling\batch1_annotated\dev.json",
     output_dir= r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\01-Data\recipes_labeling\batch1_annotated"
     )
