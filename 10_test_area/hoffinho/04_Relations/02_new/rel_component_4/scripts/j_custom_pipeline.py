@@ -1,4 +1,4 @@
-import spacy import 
+import spacy
 from thinc.api import Config
 from spacy.lang.en import English
 
@@ -10,11 +10,18 @@ from rel_model import create_relation_model, create_classification_layer, create
 
 nlp = spacy.load("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_4/training/model-best")
 
+doc = nlp("Ich gehe heute von New York nach Amsterdam, Apple, Merkel.")
+
+for ent in doc.ents:
+    print(ent)
+
 print(nlp.pipe_names)
 
-doc = nlp("Zwiebeln mit dem scharfen Messer schneiden und zum Curry hinzugeben.")
+#doc = nlp("Zwiebeln mit dem scharfen Messer schneiden und zum Curry hinzugeben.")
 
-nlp.update()
+
+
+"""nlp.update()
 
 for rel in doc._.rel: 
     print(rel)
@@ -23,4 +30,4 @@ print(doc.ents)
 
 confs = nlp.config
 
-print(confs)
+print(confs)"""
