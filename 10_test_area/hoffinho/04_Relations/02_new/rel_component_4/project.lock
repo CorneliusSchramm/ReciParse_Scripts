@@ -27,15 +27,6 @@ train_cpu:
       md5: 816d942014f94adf1a78802a9a170df8
   outs:
     - path: training/model-best
-      md5: 565156a1e15dc54d0589b0bb9800cf0e
-  spacy_version: 3.0.0rc2
-  spacy_git_version: ace6ae435
-clean:
-  cmd: python -m spacy run clean
-  script:
-    - rm -rf data/*
-    - rm -rf training/*
-  deps: []
-  outs: []
+      md5: 4792ee5ca195635022341acf978d24ea
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
