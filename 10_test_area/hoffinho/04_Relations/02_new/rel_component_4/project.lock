@@ -27,6 +27,6 @@ train_cpu:
       md5: 816d942014f94adf1a78802a9a170df8
   outs:
     - path: training/model-best
-      md5: dcbb2fea54780c24a38880dedbccb249
+      md5: f3d37ea281ad3752c84422c60ef36065
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
