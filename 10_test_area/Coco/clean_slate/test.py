@@ -1,10 +1,10 @@
 import spacy
 
-nlp = spacy.load("/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/Coco/clean_slate/model-best")
+nlp = spacy.load("/Users/Leonidas/Desktop/ReciParse_Scripts/10_test_area/Leo/clean_slate_leo_1/model-best")
 
-doc = nlp("Hallo, das ist ein Test, um zu sehen wie das funktioniert. Zwiebeln")
+doc = nlp("Ein Ei, 70 ml Wasser, etwas Mehl und 100g Zucker mischen und zu einem Teig kneten. Den Teig ausrollen und im Ofen bei 700 Grad Celsius 1 Stunde backen.")
 
 print(doc)
 
 for ent in doc.ents: 
-    print(ent)
+    print(ent, ent.label_)
