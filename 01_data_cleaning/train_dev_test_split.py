@@ -3,16 +3,19 @@ import json
 from pathlib import Path
 import random
 
-def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.4, dev_split = 0.3, test_split = 0.3):
+def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.6):
     """
-    Takes a JSONL file specified in input_file, splits it into train, test, dev based on given distribution,
+    Takes a JSON file specified in input_file, splits it into train, test, dev based on given distribution,
     and saves the three data sets into the specified output dir
     """
+
+    dev_split = (1-train_split)/2
+    test_split = dev_split
 
     file_path = Path(input_file)
     print(f"Input file at {file_path}")
 
-    # Load JSONL into list
+    # Load JSON into list
     with open(file_path, "r", encoding="utf8") as json_file:
         # data = [json.loads(line) for line in json_file if json.loads(line)["answer"]=="accept"]
         data = [rec for rec in json.load(json_file) if rec["answer"]== "accept"]
