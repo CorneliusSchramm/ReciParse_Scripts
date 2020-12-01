@@ -10,9 +10,9 @@ from wasabi import Printer
 msg = Printer()
 
 MAP_LABELS = {
-    "ARG0": "Arg0",
-    "ARG1": "Arg1",
-    "ARG": "Arg",
+    "ARG0": "arg0",
+    "ARG1": "arg1",
+    "ARG": "arg",
 }
 
 
@@ -34,7 +34,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
         for line in jsonfile:
             example = json.loads(line) #one recipe
             span_starts = set()
-
+            # example["relations"] = [rel_dict for rel_dict in example["relations"] if rel_dict["label"]!= "ARG"]
             if example["answer"] == "accept":
                 neg = 0
                 pos = 0
@@ -114,6 +114,10 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
 
                 except KeyError as e:
                     msg.fail(f"Skipping doc because of key error: {e} in {example['_input_hash']}")
+    # Printing docs
+    print(docs["train"][0].to_json(underscore=["rel"]))
+    # print(docs["dev"][0].to_json(underscore=["rel"]))
+    # print(docs["test"][0].to_json(underscore=["rel"]))
 
     docbin = DocBin(docs=docs["train"], store_user_data=True)
     docbin.to_disk(train_file)
