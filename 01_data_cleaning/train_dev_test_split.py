@@ -54,6 +54,6 @@ def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.6):
             json.dump(data, f)
 
 train_dev_test_split (
-    input_file = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\01-Data\recipes_labeling\batch1_annotated\dev.json",
+    input_file = r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\01-Data\recipes_labeling\batch1_annotated\batch1all120.jsonl,
     output_dir= r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\01-Data\recipes_labeling\batch1_annotated"
     )
