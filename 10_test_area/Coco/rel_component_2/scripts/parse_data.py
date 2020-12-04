@@ -16,7 +16,7 @@ MAP_LABELS = {
 }
 
 
-def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_split=0.3, test_split=0.3, train_split=0.4):
+def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_split=0.2, test_split=0.2, train_split=0.6):
     """Creating the corpus from the Prodigy annotations."""
     Doc.set_extension("rel", default={})
     vocab = Vocab()
