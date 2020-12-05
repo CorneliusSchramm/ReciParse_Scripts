@@ -1,4 +1,3 @@
 {
-    "jupyter.jupyterServerType": "local",
-    "python.pythonPath": "/opt/anaconda3/envs/nightly-env/bin/python"
+    "jupyter.jupyterServerType": "local"
 }
