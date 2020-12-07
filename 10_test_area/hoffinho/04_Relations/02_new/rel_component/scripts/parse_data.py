@@ -65,7 +65,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
 
                     for x1 in span_starts:
                         if ents_dict[x1] == "V":
-                            print("is verb")
+                            print(f"Token {x1} is verb")
                             for x2 in span_starts:
                                 if ents_dict[x2]!= "V":
                                     rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
