@@ -11,8 +11,6 @@ msg = Printer()
 
 MAP_LABELS = {
     "ARG0": "Arg0",
-    "ARG1": "Arg1",
-    "ARG": "Arg",
 }
 
 
@@ -76,23 +74,25 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         start = span_end_to_start[relation["head"]]     #wievielter token ist head token
                         end = span_end_to_start[relation["child"]]      #wievielter token ist child token
                         label = relation["label"]
-                        label = MAP_LABELS[label]                       #MAP_LABELS = dict containing label as key 
+                        if label == "ARG0": 
+                            label = MAP_LABELS[label]                       #MAP_LABELS = dict containing label as key 
                         if label not in rels[(start, end)]:             #check if label already exists for token combination
-                            rels[(start, end)][label] = 1.0             #initialize label as new key with value 1.0
-                            pos += 1                                    #positive case 
+                            if label == "Arg0": 
+                                rels[(start, end)][label] = 1.0             #initialize label as new key with value 1.0
+                                pos += 1                                    #positive case 
 
                     # The annotation is complete, so fill in zero's where the data is missing
                     for x1 in span_starts:
                         if ents_dict[x1][0] == "V":
                             for x2 in span_starts:
                                 if ents_dict[x2][0]!= "V":
-                                    if abs(ents_dict[x1][1] - ents_dict[x1][1]) <= 1000:
-                                        for label in MAP_LABELS.values():           #for every label
-                                            if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
+                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 1000:
+                                        #for label in MAP_LABELS.values():           #for every label
+                                        if "Arg0" not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                 neg += 1                            
-                                                rels[(x1, x2)][label] = 0.0         #span combination with label as key gets 0 as value
+                                                rels[(x1, x2)]["Arg0"] = 0.0         #span combination with label as key gets 0 as value
                     print(rels)
-                    doc._.rel = rels                                    # rels = {(1,1): {Arg0 : 1, Arg1 : 0, Arg : 0}, (1,2): {Arg0 : 0, ...}}
+                    doc._.rel = rels                                 # rels = {(1,1): {Arg0 : 1, Arg1 : 0, Arg : 0}, (1,2): {Arg0 : 0, ...}}
 
                     # only keeping documents with at least 1 positive case (if doc isn't annotated relations = empty list)
                     if pos > 0:
