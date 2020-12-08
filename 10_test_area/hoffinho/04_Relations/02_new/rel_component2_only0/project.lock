@@ -8,11 +8,11 @@ data:
       md5: 30ab60337539032dc3f43246709ce005
   outs:
     - path: data/train.spacy
-      md5: d96e8aa694ed0a9e88698ed5edb50d87
+      md5: a40a6ee71b778c91d5c814f5f63c24a2
     - path: data/dev.spacy
-      md5: a0aa19ee33edb188b450415a2e5cd2ce
+      md5: 63634618612a692e8be049a80edce76b
     - path: data/test.spacy
-      md5: 51e3e543b06d9ac9fe38df79d5bd9b4a
+      md5: 5118dbcd56e0bef02224781d119e007e
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 train_cpu:
@@ -22,20 +22,23 @@ train_cpu:
       data/train.spacy --paths.dev data/dev.spacy -c ./scripts/custom_functions.py
   deps:
     - path: data/train.spacy
-      md5: f70b346ce20dd874e3ce6244b70823e1
+      md5: 1474f3bb9044ec09099b40532f08e51a
     - path: data/dev.spacy
-      md5: 816d942014f94adf1a78802a9a170df8
+      md5: 537533a829fa897ea8d15193062970d2
   outs:
     - path: training/model-best
-      md5: 4711300a2049eb17902f0e7d1dbd3e6b
+      md5: 7b16835a0d7d5501d1022310ffcd07b4
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
-clean:
-  cmd: python -m spacy run clean
+evaluate:
+  cmd: python -m spacy run evaluate
   script:
-    - rm -rf data/*
-    - rm -rf training/*
-  deps: []
+    - python ./scripts/evaluate.py training/model-best data/test.spacy False
+  deps:
+    - path: training/model-best
+      md5: 7b16835a0d7d5501d1022310ffcd07b4
+    - path: data/test.spacy
+      md5: e14b9c94dd45cf26a299d8ab3083e0a4
   outs: []
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435

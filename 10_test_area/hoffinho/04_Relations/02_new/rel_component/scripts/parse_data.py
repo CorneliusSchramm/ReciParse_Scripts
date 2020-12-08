@@ -16,7 +16,7 @@ MAP_LABELS = {
 }
 
 
-def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_split=0.3, test_split=0.3, train_split=0.4):
+def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_split=0.2, test_split=0.1, train_split=0.7):
     """Creating the corpus from the Prodigy annotations."""
     Doc.set_extension("rel", default={})
     vocab = Vocab()
@@ -56,19 +56,18 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         span_end_to_start[span["token_end"]] = span["token_start"] #end_token of span as key for start_token (start token = wievielter token in doc)
                         entities.append(entity)                 #appended to list
                         span_starts.add(span["token_start"])    #added to set
-                        ents_dict[span["token_start"]] = span["label"]
+                        ents_dict[span["token_start"]] = (span["label"], span["start"])
                     doc.ents = entities                         #entity list assigned as doc entites
 
                     # Parse the relations
                     rels = {}
-                    print(ents_dict)
 
                     for x1 in span_starts:
-                        if ents_dict[x1] == "V":
-                            print("is verb")
+                        if ents_dict[x1][0] == "V":
                             for x2 in span_starts:
-                                if ents_dict[x2]!= "V":
-                                    rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
+                                if ents_dict[x2][0]!= "V":
+                                    if abs(ents_dict[x1][1] - ents_dict[x1][1]) <= 1000:
+                                        rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
         
                     relations = example["relations"]    #relations is list of dicts
                     for relation in relations:
@@ -84,23 +83,19 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
 
                     # The annotation is complete, so fill in zero's where the data is missing
                     for x1 in span_starts:
-                        if ents_dict[x1] == "V":
+                        if ents_dict[x1][0] == "V":
                             for x2 in span_starts:
-                                if ents_dict[x2]!= "V":
-                                    for label in MAP_LABELS.values():           #for every label
-                                        if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
-                                            neg += 1                            
-                                            rels[(x1, x2)][label] = 0.0         #span combination with label as key gets 0 as value
+                                if ents_dict[x2][0]!= "V":
+                                    if abs(ents_dict[x1][1] - ents_dict[x1][1]) <= 1000:
+                                        for label in MAP_LABELS.values():           #for every label
+                                            if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
+                                                neg += 1                            
+                                                rels[(x1, x2)][label] = 0.0         #span combination with label as key gets 0 as value
                     print(rels)
                     doc._.rel = rels                                    # rels = {(1,1): {Arg0 : 1, Arg1 : 0, Arg : 0}, (1,2): {Arg0 : 0, ...}}
 
                     # only keeping documents with at least 1 positive case (if doc isn't annotated relations = empty list)
                     if pos > 0:
-
-                        """# split to be adjusted
-                        amount_dev = 0.3
-                        amount_test = 0.4
-                        amount_train = 0.3"""
 
                         recipe_id = example["_input_hash"]
 

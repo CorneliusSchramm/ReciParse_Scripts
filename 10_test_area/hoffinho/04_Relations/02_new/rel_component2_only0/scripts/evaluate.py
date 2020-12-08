@@ -63,7 +63,6 @@ def main(trained_pipeline: Path, test_data: Path, print_details: bool):
 
     thresholds = [0.000, 0.050, 0.100, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.99, 0.999]
     print()
-    print(pred._.rel)
     print("Random baseline:")
     _score_and_format(random_examples, thresholds)
 
