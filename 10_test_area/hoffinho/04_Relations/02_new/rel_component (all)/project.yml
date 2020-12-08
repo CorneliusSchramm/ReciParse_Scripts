@@ -11,7 +11,7 @@ vars:
   test_file: "data/test.spacy"
   trained_model: "training/model-best"
   input_data: "assets/input1.json"
-  ner_model: "ner_model/model-best-ner"
+  ner_model: "/Users/jhoff/Desktop/model-best-ner"
 
 # These are the directories that the project needs. The project CLI will make
 # sure that they always exist.

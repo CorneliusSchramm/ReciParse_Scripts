@@ -17,6 +17,7 @@ def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", t_p_arg="/Users/jho
 t_p_arg0="",t_p_arg1="", input_data="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component/assets/input1.json", threshold=0.02):
     
     data = pd.read_json(input_data)["text"].to_list()
+    
     # Load pipelines
     ner_nlp = spacy.load(ner_pipeline)
     rel_a_nlp = spacy.load(t_p_arg)

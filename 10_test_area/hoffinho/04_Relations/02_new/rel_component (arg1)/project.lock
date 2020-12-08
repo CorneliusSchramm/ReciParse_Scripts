@@ -22,12 +22,12 @@ train_cpu:
       data/train.spacy --paths.dev data/dev.spacy -c ./scripts/custom_functions.py
   deps:
     - path: data/train.spacy
-      md5: b5a73e77f1810b96ce29e6b4e9cf2ced
+      md5: 3f178f5f4885663c9e76be06931d97ff
     - path: data/dev.spacy
-      md5: d115ed188a1ac9d476605b51036df8a5
+      md5: fda439fdf07c2e19f8f7cb23ffcb6f45
   outs:
     - path: training/model-best
-      md5: 94fbc76354261a9ce1a0b1db1b9dd537
+      md5: cb73e368425b349f4b7b5b4f1beab25f
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 evaluate:

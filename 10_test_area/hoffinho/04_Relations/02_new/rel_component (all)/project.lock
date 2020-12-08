@@ -45,15 +45,15 @@ evaluate:
 format:
   cmd: python -m spacy run format
   script:
-    - python ./scripts/lc_prodigy_format.py ner_model/model-best-ner training/model-best
+    - python ./scripts/lc_prodigy_format.py /Users/jhoff/Desktop/model-best-ner training/model-best
       assets/input1.json
   deps:
-    - path: ner_model/model-best-ner
+    - path: /Users/jhoff/Desktop/model-best-ner
       md5: 6953ee4b22870ba50bbaa04a27419db9
     - path: training/model-best
       md5: 94fbc76354261a9ce1a0b1db1b9dd537
     - path: assets/input1.json
-      md5: c06b4ac81a13d9e727cef61441f57d35
+      md5: ed3dbb2cd5c4ea95a941ccc66f258d4a
   outs: []
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
