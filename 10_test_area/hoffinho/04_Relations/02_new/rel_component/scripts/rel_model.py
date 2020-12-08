@@ -30,10 +30,10 @@ def create_instances(max_length: int) -> Callable[[Doc], List[Tuple[Span, Span]]
     def get_instances(doc: Doc) -> List[Tuple[Span, Span]]:
         instances = []
         for ent1 in doc.ents:
-            if ent1.label_ == "V":
+            if ent1.label_ == "V":                 #filter entity type
                 for ent2 in doc.ents:
-                    if ent2.label_ != "V":
-                    #if ent1 != ent2:
+                    if ent2.label_ in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:         #filter entity type
+                    #if ent1 != ent2:                #filter same entity
                         if max_length and abs(ent2.start - ent1.start) <= max_length:
                             instances.append((ent1, ent2))
         return instances

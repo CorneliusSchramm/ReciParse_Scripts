@@ -10,6 +10,8 @@ vars:
   dev_file: "data/dev.spacy"
   test_file: "data/test.spacy"
   trained_model: "training/model-best"
+  input_data: "assets/input1.json"
+  ner_model: "ner_model/model-best-ner"
 
 # These are the directories that the project needs. The project CLI will make
 # sure that they always exist.
@@ -75,6 +77,14 @@ commands:
       - ${vars.trained_model}
       - ${vars.test_file}
 
+  - name: "format"
+    help: "Format the predictions into prodigy style"
+    script:
+      - "python ./scripts/lc_prodigy_format.py ${vars.ner_model} ${vars.trained_model} ${vars.input_data}"
+    deps:
+      - ${vars.ner_model}
+      - ${vars.trained_model}
+      - ${vars.input_data}
 
   - name: "clean"
     help: "Remove intermediate files to start data preparation and training from a clean slate."

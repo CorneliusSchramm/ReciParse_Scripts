@@ -54,7 +54,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         span_end_to_start[span["token_end"]] = span["token_start"] #end_token of span as key for start_token (start token = wievielter token in doc)
                         entities.append(entity)                 #appended to list
                         span_starts.add(span["token_start"])    #added to set
-                        ents_dict[span["token_start"]] = (span["label"], span["start"])
+                        ents_dict[span["token_start"]] = (span["label"], span["token_start"])
                     doc.ents = entities                         #entity list assigned as doc entites
 
                     # Parse the relations
@@ -64,7 +64,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if ents_dict[x1][0] == "V":
                             for x2 in span_starts:
                                 if ents_dict[x2][0]!= "V":
-                                    if abs(ents_dict[x1][1] - ents_dict[x1][1]) <= 1000:
+                                    if abs(ents_dict[x1][1] - ents_dict[x1][1]) <= 20:
                                         rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
         
                     relations = example["relations"]    #relations is list of dicts
@@ -86,7 +86,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if ents_dict[x1][0] == "V":
                             for x2 in span_starts:
                                 if ents_dict[x2][0]!= "V":
-                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 1000:
+                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 20:
                                         #for label in MAP_LABELS.values():           #for every label
                                         if "Arg0" not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                 neg += 1                            

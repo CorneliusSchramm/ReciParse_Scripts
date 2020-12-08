@@ -26,6 +26,8 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
     count_all = {"train": 0, "dev": 0, "test": 0}
     count_pos = {"train": 0, "dev": 0, "test": 0}
 
+    long_rel_count = 0
+
     with json_loc.open("r", encoding="utf8") as jsonfile:
         length_training_data = len([True for line in jsonfile if json.loads(line)["answer"]=="accept"])
         msg.info(f"Number of accepted recipes: {length_training_data}")
@@ -56,17 +58,17 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         span_end_to_start[span["token_end"]] = span["token_start"] #end_token of span as key for start_token (start token = wievielter token in doc)
                         entities.append(entity)                 #appended to list
                         span_starts.add(span["token_start"])    #added to set
-                        ents_dict[span["token_start"]] = (span["label"], span["start"])
+                        ents_dict[span["token_start"]] = (span["label"], span["token_start"])
                     doc.ents = entities                         #entity list assigned as doc entites
 
                     # Parse the relations
                     rels = {}
 
                     for x1 in span_starts:
-                        if ents_dict[x1][0] == "V":
+                        if ents_dict[x1][0] == "V":             #filter entity type
                             for x2 in span_starts:
-                                if ents_dict[x2][0]!= "V":
-                                    if abs(ents_dict[x1][1] - ents_dict[x1][1]) <= 1000:
+                                if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
+                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 20:  #filter token distance (match with config?)
                                         rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
         
                     relations = example["relations"]    #relations is list of dicts
@@ -77,21 +79,25 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         end = span_end_to_start[relation["child"]]      #wievielter token ist child token
                         label = relation["label"]
                         label = MAP_LABELS[label]                       #MAP_LABELS = dict containing label as key 
-                        if label not in rels[(start, end)]:             #check if label already exists for token combination
-                            rels[(start, end)][label] = 1.0             #initialize label as new key with value 1.0
-                            pos += 1                                    #positive case 
+                        try: 
+                            if label not in rels[(start, end)]:             #check if label already exists for token combination
+                                rels[(start, end)][label] = 1.0             #initialize label as new key with value 1.0
+                                pos += 1                                    #positive case
+                        except:                                     
+                            long_rel_count +=1
+                            pass
 
                     # The annotation is complete, so fill in zero's where the data is missing
                     for x1 in span_starts:
-                        if ents_dict[x1][0] == "V":
+                        if ents_dict[x1][0] == "V":             #filter entity type
                             for x2 in span_starts:
-                                if ents_dict[x2][0]!= "V":
-                                    if abs(ents_dict[x1][1] - ents_dict[x1][1]) <= 1000:
+                                if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
+                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 20:      #filter token distance (match with config?)
                                         for label in MAP_LABELS.values():           #for every label
                                             if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                 neg += 1                            
                                                 rels[(x1, x2)][label] = 0.0         #span combination with label as key gets 0 as value
-                    print(rels)
+                    #print(rels)
                     doc._.rel = rels                                    # rels = {(1,1): {Arg0 : 1, Arg1 : 0, Arg : 0}, (1,2): {Arg0 : 0, ...}}
 
                     # only keeping documents with at least 1 positive case (if doc isn't annotated relations = empty list)
@@ -118,7 +124,9 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                 except KeyError as e:
                     msg.fail(f"Skipping doc because of key error: {e} in {example['_input_hash']}")
 
-        
+    
+    msg.info(f"{long_rel_count} relations have been cut because tokens are too far apart.")
+
     docbin = DocBin(docs=docs["train"], store_user_data=True)
     docbin.to_disk(train_file)
     msg.info(

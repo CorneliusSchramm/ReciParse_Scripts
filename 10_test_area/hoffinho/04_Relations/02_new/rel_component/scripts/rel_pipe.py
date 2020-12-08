@@ -79,6 +79,7 @@ class RelationExtractor(TrainablePipe):
 
         predictions = self.predict([doc])
         self.set_annotations([doc], predictions)
+        msg.info(f"Detected {total_instances} total instances.")
         return doc
 
     def predict(self, docs: Iterable[Doc]) -> Floats2d:
