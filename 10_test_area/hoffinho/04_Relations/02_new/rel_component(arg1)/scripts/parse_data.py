@@ -10,7 +10,7 @@ from wasabi import Printer
 msg = Printer()
 
 MAP_LABELS = {
-    "ARG": "Arg",
+    "ARG1": "Arg1",
 }
 
 
@@ -65,7 +65,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                     for x1 in span_starts:
                         if ents_dict[x1][0] == "V":             #filter entity type
                             for x2 in span_starts:
-                                if ents_dict[x2][0] in ["ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type (only ARG relations)
+                                if ents_dict[x2][0] in ["Z","TOOL"]:      #filter entity type
                                     if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 20:  #filter token distance (match with config?)
                                         rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
         
@@ -76,26 +76,25 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         start = span_end_to_start[relation["head"]]     #wievielter token ist head token
                         end = span_end_to_start[relation["child"]]      #wievielter token ist child token
                         label = relation["label"]
-                        
-                        try: 
+                        try:
                             label = MAP_LABELS[label]                       #MAP_LABELS = dict containing label as key 
                         except:
-                            print("Different label.")
+                            print("ARG. or Arg0")
                         
                         try: 
                             if label not in rels[(start, end)]:             #check if label already exists for token combination
-                                if label == "Arg": 
+                                if label == "Arg1":
                                     rels[(start, end)][label] = 1.0             #initialize label as new key with value 1.0
                                     pos += 1                                    #positive case
                         except:                                     
-                            long_rel_count +=1
+                            #long_rel_count +=1
                             pass
 
                     # The annotation is complete, so fill in zero's where the data is missing
                     for x1 in span_starts:
                         if ents_dict[x1][0] == "V":             #filter entity type
                             for x2 in span_starts:
-                                if ents_dict[x2][0] in ["ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
+                                if ents_dict[x2][0] in ["Z","TOOL"]:      #filter entity type
                                     if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 20:      #filter token distance (match with config?)
                                         for label in MAP_LABELS.values():           #for every label
                                             if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
@@ -129,7 +128,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                     msg.fail(f"Skipping doc because of key error: {e} in {example['_input_hash']}")
 
     
-    msg.info(f"{long_rel_count} relations have been cut because tokens are too far apart.")
+    #msg.info(f"{long_rel_count} relations have been cut because tokens are too far apart.")
 
     docbin = DocBin(docs=docs["train"], store_user_data=True)
     docbin.to_disk(train_file)
