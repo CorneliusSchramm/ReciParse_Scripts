@@ -11,6 +11,7 @@ msg = Printer()
 
 MAP_LABELS = {
     "ARG1": "Arg1",
+    "ARG0": "Arg0",
 }
 
 
@@ -79,11 +80,11 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         try:
                             label = MAP_LABELS[label]                       #MAP_LABELS = dict containing label as key 
                         except:
-                            print("ARG. or Arg0")
+                            print("ARG.")
                         
                         try: 
                             if label not in rels[(start, end)]:             #check if label already exists for token combination
-                                if label == "Arg1":
+                                if label in  ["Arg1", "Arg0"]:
                                     rels[(start, end)][label] = 1.0             #initialize label as new key with value 1.0
                                     pos += 1                                    #positive case
                         except:                                     

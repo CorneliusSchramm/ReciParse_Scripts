@@ -88,7 +88,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                     rels[(start, end)][label] = 1.0             #initialize label as new key with value 1.0
                                     pos += 1                                    #positive case
                         except:                                     
-                            long_rel_count +=1
+                            #long_rel_count +=1
                             pass
 
                     # The annotation is complete, so fill in zero's where the data is missing
@@ -129,7 +129,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                     msg.fail(f"Skipping doc because of key error: {e} in {example['_input_hash']}")
 
     
-    msg.info(f"{long_rel_count} relations have been cut because tokens are too far apart.")
+    #msg.info(f"{long_rel_count} relations have been cut because tokens are too far apart.")
 
     docbin = DocBin(docs=docs["train"], store_user_data=True)
     docbin.to_disk(train_file)

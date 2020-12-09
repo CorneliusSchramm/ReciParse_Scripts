@@ -13,13 +13,14 @@ from rel_pipe import make_relation_extractor, score_relations
 # make the config work
 from rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
 
-def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="./training/model-best", 
-input_data="./assets/input1.json", threshold=0.02):
+def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", t_p_arg="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component/training/model-best", 
+t_p_arg10="", input_data="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component/assets/input1.json", threshold=0.02):
     
     data = pd.read_json(input_data)["text"].to_list()
     # Load pipelines
     ner_nlp = spacy.load(ner_pipeline)
-    rel_nlp = spacy.load(trained_pipeline)
+    rel_a_nlp = spacy.load(t_p_arg)
+    rel_a10_nlp = spacy.load(t_p_arg10)
     
     ner_docs = []
     for recipe in data:
@@ -28,14 +29,16 @@ input_data="./assets/input1.json", threshold=0.02):
         ner_docs.append(pred)
     
     ent_dict = {ent.start : {"label": ent.label_, "text": ent} for ent in ner_docs[0].ents}
-    print(ent_dict)
 
-    for name, proc in rel_nlp.pipeline:
-        doc_rel = proc(ner_docs[0])
+    for name, proc in rel_a_nlp.pipeline:
+        doc_rel_a = proc(ner_docs[0])
+    
+    for name, proc in rel_a10_nlp.pipeline:
+        doc_rel_a10 = proc(ner_docs[0])
 
     rel_dict = {ent.start : {"verb": ent, "assigned": []} for ent in ner_docs[0].ents if ent.label_ == "V"}
 
-    for item in doc_rel._.rel.items():
+    for item in doc_rel_a._.rel.items():
         
         #pull rel information
         start_token_head, start_token_child, arg_dict = [item[0][0], item[0][1], item[1]]
@@ -46,9 +49,30 @@ input_data="./assets/input1.json", threshold=0.02):
         max_key = max(arg_dict, key=arg_dict.get)
         prob = arg_dict[max_key]
 
-        if max_key == "Arg":
+        if max_key == "Arg1":
             if prob >= 0.02:
                 rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob))
+        else:
+            if prob >= 0.000002:
+                rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob))
+    
+    for item in doc_rel_a10._.rel.items():
+        
+        #pull rel information
+        start_token_head, start_token_child, arg_dict = [item[0][0], item[0][1], item[1]]
+
+        #combine rel information mit entity information
+        text_head, labl_head, text_child, labl_child   = [ent_dict[start_token_head]["text"], ent_dict[start_token_head]["label"], ent_dict[start_token_child]["text"], ent_dict[start_token_child]["label"]]
+
+        max_key = max(arg_dict, key=arg_dict.get)
+        prob = arg_dict[max_key]
+
+        if max_key == "Arg0":
+            if prob >= 0.02:
+                rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob))
+        elif max_key == "Arg1":
+            if prob >= 0.02:
+                rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob)) 
         else:
             if prob >= 0.000002:
                 rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob))
