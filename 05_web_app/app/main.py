@@ -1,55 +1,65 @@
 from flask import Flask, render_template, url_for, request
+from flaskext.markdown import Markdown
 
 # Importing NLP Stuff
 import spacy
-nlp = spacy.load('en_core_web_sm')
+from spacy import displacy
+nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\NER trained on prodigy\ner_160_25n_03d_12-09_v2")
 
-test_sent = "Brad Pit lives in LA and works for Google. This is where our cooking instructions could be displayed."
-doc = nlp(test_sent)
 
-ents_list = [
-    {
-        "text": ent.text,
-        "label": ent.label_,
-        "start_char": ent.start_char, 
-        "end_char": ent.end_char       
-    }
-    for ent in doc.ents  
-]
+
+# ents_list = [
+#     {
+#         "text": ent.text,
+#         "label": ent.label_,
+#         "start_char": ent.start_char, 
+#         "end_char": ent.end_char       
+#     }
+#     for ent in doc.ents  
+# ]
 
 
 # Word Info
-tokens = doc.to_json()["tokens"]
-print(tokens)
+# tokens = doc.to_json()["tokens"]
+# print(tokens)
 
 # Initialize App
 app = Flask(__name__)
+Markdown(app)
 
 @app.route("/")#, methods=['GET','POST'])
 def home():
-    # if request.method == 'POST':
-    #     rawtext = request.form['rawtext']
-    #     doc = nlp(rawtext)
-    #     ents_list = [
-    #         {
-    #             "text": ent.text,
-    #             "label": ent.label_,
-    #             "start_char": ent.start_char, 
-    #             "end_char": ent.end_char       
-    #         }
-    #         for ent in doc.ents  
-    #     ]
-    return render_template("home.html", ents_list = ents_list, doc_text = doc.text)
+    demo_text = "Die Pinienkerne in der trockenen Pfanne goldgelb rösten und dann auf einem Teller abkühlen lassen.Die Zucchini waschen, putzen und in Scheiben schneiden. Die Champignons säubern und in mundgerechte Stücke schneiden. Die Zwiebel schälen und in kleine Würfel schneiden, den Schinken in Streifen schneiden und noch zweimal quer durchschneiden.Die Bandnudeln in reichlich Salzwasser bissfest kochen, abgießen und abtropfen lassen.Etwas Pflanzenöl in einer großen beschichteten Pfanne erhitzen und die Zwiebeln darin glasig werden lassen. Schinken und Rosmarin dazugeben und ca. 2 Minuten mit anbraten. Champignons und Zucchini in die Pfanne geben und kurz mit anbraten. Mit der Gemüsebrühe ablöschen und alles zugedeckt bei mittlerer Hitze ca. 10 Minuten dünsten. Die Sahne einrühren und die Sauce mit Salz und Pfeffer abschmecken.Die Nudeln unterheben, kurz durchschwenken, dann alles auf zwei tiefe Teller verteilen und mit Pinienkernen bestreut servieren. Dazu kann man noch frisch geriebenen Parmesan reichen."
+    docx = nlp(demo_text)
 
-# @app.route('/', methods=['POST'])
-# def my_form_post():
-#     text = request.form['text']
-#     processed_text = text.upper()
-#     return processed_text
-    
-@app.route("/about")
-def about():
-    return render_template("about.html", title = "About")
-    
+    demo_html = displacy.render(docx, style= "ent")
+    demo_result = demo_html
+
+    # Just Display regular text
+    plain_text = docx.text
+    return render_template("home.html", demo_result = demo_result, demo_text = plain_text)
+
+@app.route("/analyse")
+def analyse():
+    return render_template("analyse.html", title = "Analyze")
+
+@app.route("/extract", methods= ["GET", "POST"])
+def extract():
+    if request.method == "POST":
+
+        # Get the text from the input form
+        rawtext = request.form["rawtext"]
+        doc = nlp(rawtext)
+
+        # Create HTML Respresentation
+        # colors = {"V": "F16F55"}
+        # options = {"ents": ["V"], "colors": colors}
+
+        html = displacy.render(doc, style= "ent")
+        result = html
+
+        # Just Display regular text
+        plain_text = doc.text
+    return render_template("result.html", rawtext = rawtext, result = result , plain_text = plain_text)
 if __name__ == "__main__":
     app.run(debug=True)

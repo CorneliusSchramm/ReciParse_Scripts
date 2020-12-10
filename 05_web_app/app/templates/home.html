@@ -1,27 +1,29 @@
 {% extends "layout.html" %}
 {% block content%}
   <body>
-    <h1> Input a Recipe</h1>
+    <h1> How it works:</h1>
+    <br>  
+    <h3>Input a recipe</h3>
     <!-- User input Form -->
-    <form method = "POST" action = "/">
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1">Paste yout text in here ad hit "Submit"</label>
-        <textarea class="form-control" id="rawtext" rows="3" required="true"></textarea>
-      </div>
-      <button class="btn btn-outline-success " type="reset">Clear</button>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-    <br/>
-    <article class="media content-section">
-      <div class="media-body">
-        <div class="article-metadata">
-          <a class="mr-2" href="#">Your Input Text</a>
+    <div>
+      <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="/analyse"> Analyse your text here</a>
+          </div>
+          <p class="article-content"> {{ demo_text }}</p>
         </div>
-        <p class="article-content"> {{ doc_text }}</p>
-      </div>
-    </article>
-    <h1> Model Results</h1>
-    {% for ent in ents_list %}
+      </article>
+    </div>
+    <br/>
+    <h3>Get Model Results</h3>
+    <div>
+      <article class="media content-section">
+        {{ demo_result|markdown }}
+      </article>
+      
+    </div>
+    <!-- {% for ent in ents_list %}
       <article class="media content-section">
         <div class="media-body">
           <div class="article-metadata">
@@ -32,7 +34,7 @@
           <h2><a class="article-title" href="#">{{ ent.text }}</a></h2>
         </div>
       </article>
-    {% endfor%}
+    {% endfor%} -->
   </body>
 {% endblock content %}
 

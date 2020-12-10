@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content%}
+  <h1> Analyze </h1>
+  <div>
+    <form method = "POST" action = "\extract">
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Paste yout text in here ad hit "Submit"</label>
+        <textarea class="form-control" name="rawtext" rows="3" required="true"></textarea>
+      </div>
+      <button class="btn btn-outline-success" type="reset">Clear</button>
+      <button class="btn btn-primary" type="submit" >Submit</button>
+    </form>
+  </div>
+ 
+{% endblock content %}

@@ -9,7 +9,7 @@ body {
   }
   
   .bg-steel {
-    background-color: #345672;
+    background-color: #F16F55;
   }
   
   .site-header .navbar-nav .nav-link {
@@ -37,7 +37,7 @@ body {
   }
   
   a.article-title:hover {
-    color: #428bca;
+    color: #F16F55;
     text-decoration: none;
   }
   
