@@ -13,8 +13,8 @@ from rel_pipe import make_relation_extractor, score_relations
 # make the config work
 from rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
 
-def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component/training/model-best", 
-input_data="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component/assets/input1.json", threshold=0.02):
+def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="./training/model-best", 
+input_data="./assets/input1.json", threshold=0.02):
     
     data = pd.read_json(input_data)["text"].to_list()
     # Load pipelines

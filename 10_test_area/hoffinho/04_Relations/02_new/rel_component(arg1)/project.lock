@@ -27,7 +27,7 @@ train_cpu:
       md5: fda439fdf07c2e19f8f7cb23ffcb6f45
   outs:
     - path: training/model-best
-      md5: cb73e368425b349f4b7b5b4f1beab25f
+      md5: 8d50234b2ff79d8e3e25f1d57b45533f
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 evaluate:
@@ -36,7 +36,7 @@ evaluate:
     - python ./scripts/evaluate.py training/model-best data/test.spacy False
   deps:
     - path: training/model-best
-      md5: cb73e368425b349f4b7b5b4f1beab25f
+      md5: 8d50234b2ff79d8e3e25f1d57b45533f
     - path: data/test.spacy
       md5: 0bc5492f4bb3153e4f7c294fe0761ec0
   outs: []
