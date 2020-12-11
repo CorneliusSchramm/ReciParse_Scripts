@@ -82,8 +82,8 @@ for key in final_dict.keys():
     print(f"{key} --> {list_creator(final_dict, key)}\n")
 
 
-
-doc2 = nlp("Die Eier kochen, schneiden und pellen. Danach anrichten.")
+"""
+doc2 = nlp("Die Eier hart Dann pellen ")
 
 for token in doc2:
-    print(f"{token}: POS = {token.pos_}; DEP = {token.dep_}; DEP_HEAD = {token.head.text}")
+    print(f"{token}: POS = {token.pos_}; DEP = {token.dep_}; DEP_HEAD = {token.head.text}")"""
