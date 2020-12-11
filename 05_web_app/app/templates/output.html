@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content%}
+
+<!-- Form user Input, erste Reihe -->
+
+<div class = "row" style="background-color:rgba(190, 148, 109, 0)">
+    <!-- <form method = "POST" action = "\output">
+        <label for="exampleFormControlTextarea1"></label>
+        <textarea class="form-control" name="rawtext" rows="4" required="true" placeholder="Paste your recipe in here and hit 'Submit'" ></textarea>
+        <button class="btn btn-outline-success" type="reset">Clear</button>
+        <button class="btn btn-primary" type="submit" >Submit</button>        
+    </form> -->
+    <div class="input-group mb-3">
+        <!-- <form method="POST" action="\output"> -->
+        <textarea class="form-control" name="rawtext" rows="4" required="true" placeholder="Paste your recipe in here and hit 'Submit'" ></textarea>
+            <div class="form-horizontal">
+                <button class="btn btn-outline-success" type="reset">Clear</button>    
+            </div>
+            <div>
+                <button class="btn btn-primary" type="submit" >Submit</button>   
+            </div> 
+        <!-- </form> -->
+    </div>
+</div>
+
+<!-- 2. Reihe für Model Predictions -->
+<!-- style="background-color: rgba(119, 195, 112, 0.2)" -->
+<div class = "row" >
+    <!-- style="background-color: rgba(165, 112, 195, 0.2)" -->
+    <div class = "col-3" >
+        <div class="custom-box">
+            {{ demo_text }}
+        </div>
+    </div>
+    <!-- style="background-color: rgba(112, 148, 195, 0.2)" -->
+    <div class = "col-6" >
+        <div class="custom-box">
+            {{ demo_result|markdown }} 
+        </div>
+    </div>
+    <!--  style="background-color: rgba(207, 111, 111, 0.2)" -->
+    <div class = "col-3" >
+        <div class="custom-box">
+            {% for verb in verbs %}
+                <strong>{{ verb }}</strong><br>
+                Arg0: "geriebenen Käse" <br>
+                Arg1: "Muerr-Pilze" <br>
+                Arg: ["sofort", "auf"] <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
