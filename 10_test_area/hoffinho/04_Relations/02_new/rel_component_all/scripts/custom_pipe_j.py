@@ -20,7 +20,7 @@ colors_dict = {
 }
 
 
-def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component (all)/training/model-best", input_data="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component (all)/assets/input1.json", threshold=0.02):
+def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_all/training/model-best", input_data = "/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_all/assets/input1.json", threshold=0.02):
     
     data = pd.read_json(input_data)["text"].to_list()
     # Load pipelines
@@ -34,6 +34,7 @@ def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/
         ner_docs.append(pred)
     
     ent_dict = {ent.start : {"label": ent.label_, "text": ent} for ent in ner_docs[0].ents}
+    print(ent_dict)
 
     for name, proc in rel_nlp.pipeline:
         doc_rel = proc(ner_docs[0])
