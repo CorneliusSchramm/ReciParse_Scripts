@@ -15,7 +15,7 @@
     {% endif %}
   </head>
   <body>
-    <header class="site-header">
+    <!-- <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
           <a class="navbar-brand mr-4" href="/"> <strong>ReciParse</strong> </a>
@@ -25,42 +25,36 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="/">Home</a>
-              <!-- <a class="nav-item nav-link" href="/about">About</a> -->
-              <a class="nav-item nav-link" href="/analyse">Analyze</a>
+              <a class="nav-item nav-link" href="/output">Output</a>
+              
             </div>
-            <!-- Navbar Right Side -->
-            <!-- <div class="navbar-nav">
+            
+            <div class="navbar-nav">
               <a class="nav-item nav-link" href="/login">Login</a>
               <a class="nav-item nav-link" href="/register">Register</a>
-            </div> -->
+            </div>
           </div>
         </div>
       </nav>
-    </header>
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          {% block content %}{% endblock %}
-        </div>
-        <!-- <div s
-          <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
-              <ul class="list-group">
-                  <li class="list-group-item list-group-item-light">Latest Posts</li>
-                  <li class="list-group-item list-group-item-light">Announcements</li>
-                  <li class="list-group-item list-group-item-light">Calendars</li>
-                  <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
-            </p>
-          </div>
-        </div> -->
+    </header> -->
+    <!-- style="padding: 60px; background-color: rgba(17, 184, 161, 0.2)" -->
+    <div style="padding: 60px;" >
+      <div class="container-fluid">
+        {% block content %}{% endblock %}
       </div>
-    </main>
+    </div>
+    
+ 
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script> $(document).ready(function () {
+      if (!$.browser.webkit) {
+          $('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');
+      }
+  });</script>
   </body>
 </html>

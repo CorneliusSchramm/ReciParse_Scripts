@@ -1,41 +1,15 @@
 {% extends "layout.html" %}
 {% block content%}
-  <body>
-    <h1> How it works:</h1>
-    <br>  
-    <h3>Input a recipe</h3>
-    <!-- User input Form -->
-    <div>
-      <article class="media content-section">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-2" href="/analyse"> Analyse your text here</a>
-          </div>
-          <p class="article-content"> {{ demo_text }}</p>
-        </div>
-      </article>
-    </div>
-    <br/>
-    <h3>Get Model Results</h3>
-    <div>
-      <article class="media content-section">
-        {{ demo_result|markdown }}
-      </article>
-      
-    </div>
-    <!-- {% for ent in ents_list %}
-      <article class="media content-section">
-        <div class="media-body">
-          <div class="article-metadata">
-            <a class="mr-2" href="#">{{ ent.label }}</a>
-            <small class="text-muted">Start: {{ ent.start_char }}</small>
-            <small class="text-muted">End: {{ ent.end_char }}</small>
-          </div>
-          <h2><a class="article-title" href="#">{{ ent.text }}</a></h2>
-        </div>
-      </article>
-    {% endfor%} -->
-  </body>
+  <div style= "margin-top: 150px;">
+    <form method = "POST" action = "\output">
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1"></label>
+        <textarea class="form-control" name="rawtext" rows="3" required="true" placeholder="Paste your recipe in here and hit 'Submit'" value= "Die Pinienkerne in der trockenen Pfanne goldgelb rösten und dann auf einem Teller abkühlen lassen.Die Zucchini waschen, putzen und in Scheiben schneiden. Die Champignons säubern und in mundgerechte Stücke schneiden. Die Zwiebel schälen und in kleine Würfel schneiden, den Schinken in Streifen schneiden und noch zweimal quer durchschneiden."></textarea>
+        <!-- <input  rows="2" class="form-control" name="rawtext" type="text" value="Die Pinienkerne in der trockenen Pfanne goldgelb rösten und dann auf einem Teller abkühlen lassen.Die Zucchini waschen, putzen und in Scheiben schneiden. Die Champignons säubern und in mundgerechte Stücke schneiden. Die Zwiebel schälen und in kleine Würfel schneiden, den Schinken in Streifen schneiden und noch zweimal quer durchschneiden."> -->
+      </div>
+      <button class="btn btn-outline-success" type="reset">Clear</button>
+      <button class="btn btn-primary" type="submit" >Submit</button>
+    </form>
+  </div>
+ 
 {% endblock content %}
-
-
