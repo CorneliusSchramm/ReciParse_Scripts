@@ -12,7 +12,11 @@ msg = Printer()
 MAP_LABELS = {
     "ARG0": "Arg0",
     "ARG1": "Arg1",
-    "ARG": "Arg",
+    "ARGa": "ArgAttr",
+    "ARGb": "ArgTemp",
+    "ARGc": "ArgDauer",
+    "ARGd": "ArgZeitp",
+    "ARGe": "ArgPräp"
 }
 
 
@@ -72,13 +76,27 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                         rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
         
                     relations = example["relations"]    #relations is list of dicts
+                    count = 0
                     for relation in relations:
                         # the 'head' and 'child' annotations refer to the end token in the span
                         # but we want the first token
                         start = span_end_to_start[relation["head"]]     #wievielter token ist head token
                         end = span_end_to_start[relation["child"]]      #wievielter token ist child token
                         label = relation["label"]
-                        label = MAP_LABELS[label]                       #MAP_LABELS = dict containing label as key 
+                        
+                        if label == "ARG":
+                            if ents_dict[end][0] == "ATTR":
+                                label = "ArgAttr"
+                            elif ents_dict[end][0] == "TEMP":
+                                label = "ArgTemp"
+                            elif ents_dict[end][0] == "DAUER":
+                                label = "ArgDauer"
+                            elif ents_dict[end][0] == "ZEITP":
+                                label = "ArgZeitp" 
+                            elif ents_dict[end][0] == "PRÄP":
+                                label = "ArgPräp"      #    "ARG": "ArgTemp", "ARG": "ArgDauer", "ARG": "ArgZeitp","ARG": "ArgPräp"
+
+                        #label = MAP_LABELS[label]                       #MAP_LABELS = dict containing label as key 
                         try: 
                             if label not in rels[(start, end)]:             #check if label already exists for token combination
                                 rels[(start, end)][label] = 1.0             #initialize label as new key with value 1.0
@@ -86,6 +104,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         except:                                     
                             long_rel_count +=1
                             pass
+
 
                     # The annotation is complete, so fill in zero's where the data is missing
                     for x1 in span_starts:
@@ -97,7 +116,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                             if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                 neg += 1                            
                                                 rels[(x1, x2)][label] = 0.0         #span combination with label as key gets 0 as value
-                    #print(rels)
+                    print(rels)
                     doc._.rel = rels                                    # rels = {(1,1): {Arg0 : 1, Arg1 : 0, Arg : 0}, (1,2): {Arg0 : 0, ...}}
 
                     # only keeping documents with at least 1 positive case (if doc isn't annotated relations = empty list)

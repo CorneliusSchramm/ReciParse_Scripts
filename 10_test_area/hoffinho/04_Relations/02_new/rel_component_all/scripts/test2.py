@@ -87,3 +87,14 @@ doc2 = nlp("Die Eier hart Dann pellen ")
 
 for token in doc2:
     print(f"{token}: POS = {token.pos_}; DEP = {token.dep_}; DEP_HEAD = {token.head.text}")"""
+
+spacy.load()
+
+for name, proc in rel_nlp.pipeline:
+    doc_rel = proc("Die Eier hart kochen. Dann pellen und mit einem Eierschneider in Scheiben schneiden. Den Reis halbgar kochen und zur Seite stellen. Die Wurst (Kolbász) in dünne Scheiben schneiden.Den Knoblauch abziehen und fein würfeln. Die Zwiebel schälen, fein hacken und in etwas Fett glasig braten. Knoblauch und Hackfleisch dazu geben und so lange braten, bis das Hackfleisch schön krümelig wird. Den eigenen Saft nicht ganz verkochen lassen. Die Fleischmasse mit Salz, Pfeffer und Paprikapulver würzen.Das Sauerkraut kurz durchspülen, ausdrücken und abtropfen lassen (damit es nicht zu sauer wird). Das Sauerkraut in einen Topf geben und mit dem Kümmel und den Lorbeerblättern vermischen. Ca. 30 Minuten unter Zugabe von wenig Wasser bei niedriger Stufe dünsten.Eine feuerfeste Form mit etwas Öl einfetten und den Boden dünn mit Sauerkraut belegen. Darauf Kolbász und die Hälfte der in Scheiben geschnittene Eier verteilen, dann eine weitere dünne Schicht Sauerkraut drüber legen. Mit 1 Becher Schmand bedecken. Nun das Hackfleisch mit dem Reis mischen und auf der Sauerkrautschicht gleichmäßig verteilen. Mit der zweiten Hälfte der Eier belegen und die dritte Schicht Sauerkraut oben drauf verteilen. Wenn noch Zutaten (Hackfleisch-Reis-Masse und Sauerkraut) übrig sind, kann man diese Schichten weiter so legen. Ganz oben kommt eine Schicht Sauerkraut. Auf diese letzte Schicht verteilt man noch den Rest vom Schmand (sollte reichlich sein). Den Speck in dünne Scheiben schneiden und damit alles abdecken. Mit etwas Öl besprenkeln. Die Form mit einem Deckel verschließend.Im vorgeheizten Backofen bei 175°C ober-\/Unterhitze gut 1 Std. garen.Ganz frische Baguettebrötchen oder Weißbrot schmeckt am allerbesten dazu. Man kann aber auch Kartoffel- oder Semmelknödel dazu reichen. Etwas aufwendig, aber die Mühe lohnt sich... es ist einfach mega-ober-lecker.Anmerkung: Für viele sind Eier in Verbindung mit Sauerkraut ein No-Go, man kann sie also auch weglassen.")
+
+rel_dict = {ent.start : {"verb": ent, "assigned": []} for ent in ner_docs[0].ents if ent.label_ == "V"}
+
+for item in doc_rel._.rel.items():
+
+    print(item)
