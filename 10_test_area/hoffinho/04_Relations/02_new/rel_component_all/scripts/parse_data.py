@@ -72,7 +72,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if ents_dict[x1][0] == "V":             #filter entity type
                             for x2 in span_starts:
                                 if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
-                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 40:  #filter token distance (match with config?)
+                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 20:  #filter token distance (match with config?)
                                         rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
         
                     relations = example["relations"]    #relations is list of dicts
@@ -111,7 +111,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if ents_dict[x1][0] == "V":             #filter entity type
                             for x2 in span_starts:
                                 if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
-                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 40:      #filter token distance (match with config?)
+                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 20:      #filter token distance (match with config?)
                                         for label in MAP_LABELS.values():           #for every label
                                             if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                 neg += 1                            
