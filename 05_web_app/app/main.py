@@ -7,22 +7,6 @@ from spacy import displacy
 nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\NER trained on prodigy\ner_160_25n_03d_12-09_v2")
 
 
-
-# ents_list = [
-#     {
-#         "text": ent.text,
-#         "label": ent.label_,
-#         "start_char": ent.start_char, 
-#         "end_char": ent.end_char       
-#     }
-#     for ent in doc.ents  
-# ]
-
-
-# Word Info
-# tokens = doc.to_json()["tokens"]
-# print(tokens)
-
 # Initialize App
 app = Flask(__name__)
 Markdown(app)
