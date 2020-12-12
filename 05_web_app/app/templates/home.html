@@ -1,15 +1,17 @@
 {% extends "layout.html" %}
 {% block content%}
-  <div style= "margin-top: 150px;">
-    <form method = "POST" action = "\output">
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1"></label>
-        <textarea class="form-control" name="rawtext" rows="3" required="true" placeholder="Paste your recipe in here and hit 'Submit'" value= "Die Pinienkerne in der trockenen Pfanne goldgelb rösten und dann auf einem Teller abkühlen lassen.Die Zucchini waschen, putzen und in Scheiben schneiden. Die Champignons säubern und in mundgerechte Stücke schneiden. Die Zwiebel schälen und in kleine Würfel schneiden, den Schinken in Streifen schneiden und noch zweimal quer durchschneiden."></textarea>
-        <!-- <input  rows="2" class="form-control" name="rawtext" type="text" value="Die Pinienkerne in der trockenen Pfanne goldgelb rösten und dann auf einem Teller abkühlen lassen.Die Zucchini waschen, putzen und in Scheiben schneiden. Die Champignons säubern und in mundgerechte Stücke schneiden. Die Zwiebel schälen und in kleine Würfel schneiden, den Schinken in Streifen schneiden und noch zweimal quer durchschneiden."> -->
+<div class="container" style= "margin-bottom: 20px; margin-top: 0px;">
+  <form  method = "POST" action = "\output">
+      <div class="d-table-cell align-middle">
+          <button class="btn btn-primary" type="reset">Clear</button>  
       </div>
-      <button class="btn btn-outline-success" type="reset">Clear</button>
-      <button class="btn btn-primary" type="submit" >Submit</button>
-    </form>
-  </div>
+      <div class="d-table-cell w-100">
+          <input name="rawtext" class="form-control" placeholder="Paste your recipe in here and hit 'Submit'">
+      </div>
+      <div class="d-table-cell align-middle">
+          <button class="btn btn-outline-success" type="submit" >Submit </button>  
+      </div>
+  </form>
+</div>
  
 {% endblock content %}
