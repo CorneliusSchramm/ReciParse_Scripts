@@ -8,11 +8,11 @@ data:
       md5: 6e233e341753e8654981d249cd074e36
   outs:
     - path: data/train.spacy
-      md5: 602cda940b4131ec624cccd3105ff1bd
+      md5: 59db3f32b2e7fe521c91fabdcee225a6
     - path: data/dev.spacy
-      md5: 3e6f6fec4e292c2e27d1d56a17393da0
+      md5: fb8db3ec0c85f85c91feaa32e97efd51
     - path: data/test.spacy
-      md5: ceaf4ddb708616e04ef5680d11da356a
+      md5: 15a0e3a26cf847e992834ac93fb42f01
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 train_cpu:
@@ -22,12 +22,12 @@ train_cpu:
       data/train.spacy --paths.dev data/dev.spacy -c ./scripts/custom_functions.py
   deps:
     - path: data/train.spacy
-      md5: 602cda940b4131ec624cccd3105ff1bd
+      md5: 59db3f32b2e7fe521c91fabdcee225a6
     - path: data/dev.spacy
-      md5: 3e6f6fec4e292c2e27d1d56a17393da0
+      md5: fb8db3ec0c85f85c91feaa32e97efd51
   outs:
     - path: training/model-best
-      md5: 70cf6f20bd0f33abe1ce6aa890186e6a
+      md5: 382642e74f9fc6acaa3a0304ba45422f
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 evaluate:
@@ -36,9 +36,9 @@ evaluate:
     - python ./scripts/evaluate.py training/model-best data/test.spacy False
   deps:
     - path: training/model-best
-      md5: d23486c5d13d177b6520a595b3b906cc
+      md5: 382642e74f9fc6acaa3a0304ba45422f
     - path: data/test.spacy
-      md5: 0629adf83b4999f8b16e6ce228673173
+      md5: 15a0e3a26cf847e992834ac93fb42f01
   outs: []
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435

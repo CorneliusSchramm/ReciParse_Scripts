@@ -1,12 +1,12 @@
 import spacy
 
-
+"""
 nlp = spacy.load("de_core_news_sm")
 
 doc = nlp("Die Eier im heißen Wasser kochen, anschließend schneiden und zur Seite legen. Dann wieder kochen lassen.")
 
 def children_getter(token, dict):       #dict = {}
-    """Creating a nested dictionary with multiple levels of children."""
+    #Creating a nested dictionary with multiple levels of children.
     
     dict[token]= {}                     #dict = {token: {} }
     
@@ -19,10 +19,10 @@ def children_getter(token, dict):       #dict = {}
     
     return 
 
+"""
 
 
-
-
+"""
 verb_to_string = {}
 
 text = ""
@@ -55,7 +55,7 @@ for key in verb_to_string.keys():
         else: 
             pass
 
-
+"""
 
 
 """
@@ -100,6 +100,7 @@ for key in verb_to_string.keys():
     print("--------------")
 """
 
-print(final_dict)
+#print(final_dict)
+
 
                     

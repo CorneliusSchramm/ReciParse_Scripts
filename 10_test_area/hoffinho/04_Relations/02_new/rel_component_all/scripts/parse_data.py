@@ -10,8 +10,10 @@ from wasabi import Printer
 msg = Printer()
 
 MAP_LABELS = {
-    "ARG0": "Arg0",
-    "ARG1": "Arg1",
+    "ARG0a": "Arg0Z",
+    "ARG0b": "Arg0Tool",
+    "ARG1a": "Arg1Z",
+    "ARG1b": "Arg1Tool",
     "ARGa": "ArgAttr",
     "ARGb": "ArgTemp",
     "ARGc": "ArgDauer",
@@ -95,6 +97,18 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                 label = "ArgZeitp" 
                             elif ents_dict[end][0] == "PRÄP":
                                 label = "ArgPräp"      #    "ARG": "ArgTemp", "ARG": "ArgDauer", "ARG": "ArgZeitp","ARG": "ArgPräp"
+
+                        elif label == "ARG0":
+                            if ents_dict[end][0] == "Z":
+                                label = "Arg0Z"
+                            elif ents_dict[end][0] == "TOOL":
+                                label = "Arg0Tool"
+
+                        elif label == "ARG1":
+                            if ents_dict[end][0] == "Z":
+                                label = "Arg1Z"
+                            elif ents_dict[end][0] == "TOOL":
+                                label = "Arg1Tool"
 
                         #label = MAP_LABELS[label]                       #MAP_LABELS = dict containing label as key 
                         try: 
