@@ -21,6 +21,8 @@ MAP_LABELS = {
     "ARGe": "ArgPräp"
 }
 
+MAX_LENGTH = 30
+
 
 def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_split=0.2, test_split=0.1, train_split=0.7):
     """Creating the corpus from the Prodigy annotations."""
@@ -74,7 +76,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if ents_dict[x1][0] == "V":             #filter entity type
                             for x2 in span_starts:
                                 if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
-                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 30:  #filter token distance (match with config?)
+                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= MAX_LENGTH:  #filter token distance (match with config?)
                                         rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
         
                     relations = example["relations"]    #relations is list of dicts
@@ -125,12 +127,16 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if ents_dict[x1][0] == "V":             #filter entity type
                             for x2 in span_starts:
                                 if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
-                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= 30:      #filter token distance (match with config?)
+                                    if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= MAX_LENGTH:      #filter token distance (match with config?)
                                         for label in MAP_LABELS.values():           #for every label
                                             if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                 neg += 1                            
                                                 rels[(x1, x2)][label] = 0.0         #span combination with label as key gets 0 as value
-                    print(rels)
+                                        if 1.0 not in rels[(x1, x2)].values():
+                                            rels[(x1, x2)]["ArgNone"] = 1.0
+                                        else:
+                                            rels[(x1, x2)]["ArgNone"] = 0.0
+                    #print(rels)
                     doc._.rel = rels                                    # rels = {(1,1): {Arg0 : 1, Arg1 : 0, Arg : 0}, (1,2): {Arg0 : 0, ...}}
 
                     # only keeping documents with at least 1 positive case (if doc isn't annotated relations = empty list)

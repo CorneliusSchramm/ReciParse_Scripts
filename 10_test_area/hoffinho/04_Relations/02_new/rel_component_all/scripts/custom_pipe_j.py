@@ -20,7 +20,7 @@ colors_dict = {
 }
 
 
-def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_all/training/model-best", input_data = "/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_all/assets/input1.json", threshold=0.02):
+def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_all/training/model-last", input_data = "/Users/jhoff/Desktop/ReciParse_Scripts/10_test_area/hoffinho/04_Relations/02_new/rel_component_all/assets/input1.json", threshold=0.02):
     
     data = pd.read_json(input_data)["text"].to_list()
     # Load pipelines
@@ -29,7 +29,7 @@ def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/
     
     ner_docs = []
     for recipe in data:
-        print(recipe)
+        #print(recipe)
         pred = ner_nlp(recipe)
         ner_docs.append(pred)
     
@@ -53,21 +53,23 @@ def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/
         max_key = max(arg_dict, key=arg_dict.get)
         prob = arg_dict[max_key]
 
-        if max_key == "Arg0":
-            if prob >= 0.02:
+        if max_key in ["Arg0Z", "Arg0Tool", "Arg1Z", "Arg1Tool"]:
+            if prob >= 0.0002:
                 rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob))
-        elif max_key == "Arg1":
-            if prob >= 0.02:
+        elif max_key in ["ArgAttr", "ArgTemp", "ArgDauer", "ArgZeitp", "ArgPräp"]:
+            if prob >= 0.00001:
                 rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob)) 
-        else:
-            if prob >= 0.000002:
-                rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob))
-    
+        elif max_key == "ArgNone":
+            pass
+            """if prob >= 0.000002:
+                rel_dict[start_token_head]["assigned"].append((text_child, labl_child, max_key, prob))"""
+
     # print(rel_dict)
 
     for key in rel_dict.keys():
         print(rel_dict[key])
 
+    """
     pred = doc_rel
 
     # PRODIGY OUTPUT -------------------------------------------------------------------------------
@@ -181,7 +183,7 @@ def main(ner_pipeline="/Users/jhoff/Desktop/model-best-ner", trained_pipeline="/
         json.dump(main_dict, f, ensure_ascii=False)
     
     return doc_rel
-
+    """
 
 if __name__ == "__main__":
     typer.run(main)
