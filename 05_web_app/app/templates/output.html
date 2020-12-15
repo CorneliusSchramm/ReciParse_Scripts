@@ -54,11 +54,11 @@
     <!--  style="background-color: rgba(207, 111, 111, 0.2)" -->
     <div class = "col-3" style= "padding: 0px;">
         <div class="custom-box right-box">
-            {% for verb in verbs %}
-                <strong>{{ verb }}</strong><br>
-                Arg0: "geriebenen Käse" <br>
-                Arg1: "Muerr-Pilze" <br>
-                Arg: ["sofort", "auf"] <br>
+            {% for step in steps_list %}
+                <strong>{{ step[0] }}</strong><br>
+                {% for item in step[1].items()%}
+                    {{item}} <br>
+                {% endfor %}
             {% endfor %}
         </div>
     </div>
