@@ -59,7 +59,7 @@ def fscore(precision, recall):
     return 2 * ((p * r) / (p + r + 1e-100))
 
 
-# list of individual overlap dicts
+# list of individual overlap dicts (each recipe annotation is dict)
 ov_recipes_coco = jsonl_to_list(path_coco)
 ov_recipes_graf = jsonl_to_list(path_graf)
 ov_recipes_hoff = jsonl_to_list(path_hoff)
@@ -126,7 +126,7 @@ for i in range(len(ov_all_dicts)-1):
         count += 1
 
 print("")
-print("####   Individual comparison   ####")
+print("####   Individual NER comparison   ####")
 
 for key in inf_per_comparison.keys():
     k1 = "Ann info"
@@ -142,7 +142,7 @@ average_r = sum([inf_per_comparison[key]["Recall"] for key in inf_per_comparison
 average_f = sum([inf_per_comparison[key]["F-Score"] for key in inf_per_comparison.keys()]) / len(inf_per_comparison)
 
 print("")
-print("####   Overall statistics   ####")
+print("####   Overall NER statistics   ####")
 print(f"Average Precision: {round(average_p, 3)}")
 print(f"Average Recall   : {round(average_r, 3)}")
 print(f"Average F-score  : {round(average_f, 3)}")

@@ -126,7 +126,7 @@ for i in range(len(ov_all_dicts)-1):
         count += 1
 
 print("")
-print("####   Individual comparison   ####")
+print("####   Individual REL comparison   ####")
 
 for key in inf_per_comparison.keys():
     k1 = "Ann info"
@@ -142,7 +142,7 @@ average_r = sum([inf_per_comparison[key]["Recall"] for key in inf_per_comparison
 average_f = sum([inf_per_comparison[key]["F-Score"] for key in inf_per_comparison.keys()]) / len(inf_per_comparison)
 
 print("")
-print("####   Overall statistics   ####")
+print("####   Overall REL statistics   ####")
 print(f"Average Precision: {round(average_p, 3)}")
 print(f"Average Recall   : {round(average_r, 3)}")
 print(f"Average F-score  : {round(average_f, 3)}")
