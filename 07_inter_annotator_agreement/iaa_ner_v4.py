@@ -139,7 +139,7 @@ for key in inf_per_comparison.keys():
 
 average_p = sum([inf_per_comparison[key]["Precision"] for key in inf_per_comparison.keys()]) / len(inf_per_comparison)
 average_r = sum([inf_per_comparison[key]["Recall"] for key in inf_per_comparison.keys()]) / len(inf_per_comparison)
-average_f = sum([inf_per_comparison[key]["Precision"] for key in inf_per_comparison.keys()]) / len(inf_per_comparison)
+average_f = sum([inf_per_comparison[key]["F-Score"] for key in inf_per_comparison.keys()]) / len(inf_per_comparison)
 
 print("")
 print("####   Overall statistics   ####")
