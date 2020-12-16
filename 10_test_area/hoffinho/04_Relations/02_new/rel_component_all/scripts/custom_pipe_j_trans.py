@@ -21,11 +21,11 @@ input_data="./assets/input1.json", threshold=0.02):
     ner_nlp = spacy.load(ner_pipeline)
     rel_nlp = spacy.load(trained_pipeline)
     
-    ner_docs = []
-    for recipe in data:
-        print(recipe)
-        pred = ner_nlp(recipe)
-        ner_docs.append(pred)
+    # ner_docs = []
+    # for recipe in data:
+    #     print(recipe)
+    #     pred = ner_nlp(recipe)
+    #     ner_docs.append(pred)
     
     ent_dict = {ent.start : {"label": ent.label_, "text": ent} for ent in ner_docs[0].ents}
     print(ent_dict)

@@ -74,6 +74,7 @@ ov_dict_jthn = {example["text"] : create_ent_set(example["spans"]) for example i
 
 ov_all_dicts = [ov_dict_coco, ov_dict_graf, ov_dict_hoff, ov_dict_jthn]
 
+inf_per_comp = {}
 
 # comparison hoff-jthn
 for key in ov_dict_jthn.keys():
