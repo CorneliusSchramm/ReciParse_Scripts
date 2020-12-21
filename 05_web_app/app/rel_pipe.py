@@ -79,6 +79,7 @@ class RelationExtractor(TrainablePipe):
 
         predictions = self.predict([doc])
         self.set_annotations([doc], predictions)
+        msg.info(f"Detected {total_instances} total instances.")
         return doc
 
     def predict(self, docs: Iterable[Doc]) -> Floats2d:
@@ -223,5 +224,3 @@ def score_relations(examples: Iterable[Example], threshold: float) -> Dict[str, 
         "rel_micro_r": micro_prf.recall,
         "rel_micro_f": micro_prf.fscore,
     }
-
-print("rel pipe functions OK")

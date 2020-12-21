@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 import random
 
-def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.8, dev_split = 0.2, test_split = 0):
+def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.6, dev_split = 0.2, test_split = 0.2):
     """
     Takes a JSON file specified in input_file, splits it into train, test, dev based on given distribution,
     and saves the three data sets into the specified output dir
