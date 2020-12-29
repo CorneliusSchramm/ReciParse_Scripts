@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content%}
+<div class="container" style= "margin-bottom: 20px; margin-top: 0px;">
+  <form  method = "POST" action = "\output">
+      <div class="d-table-cell align-middle">
+          <button class="btn btn-primary" type="reset">Clear</button>  
+      </div>
+      <div class="d-table-cell w-100">
+          <input name="rawtext" class="form-control" placeholder="Paste your recipe in here and hit 'Submit'">
+      </div>
+      <div class="d-table-cell align-middle">
+          <button class="btn btn-outline-success" type="submit" >Submit </button>  
+      </div>
+  </form>
+</div>
+ 
+{% endblock content %}

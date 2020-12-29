@@ -1,6 +1,6 @@
 from prodigy.components.db import connect
 db = connect()
-examples = db.get_dataset("batch1_overlap_coco")
+examples = db.get_dataset("batch1+2_all_f")
 filtered_examples = []
 for eg in examples:
     if "spans" in eg:
@@ -15,4 +15,4 @@ for eg in examples:
 
 # Add filtered examples to new dataset
 db.add_dataset("myDataset2_filtered")
-db.add_examples(filtered_examples, ["batch1_overlap_coco_f"])
+db.add_examples(filtered_examples, ["batch1+2_all_f_test"])

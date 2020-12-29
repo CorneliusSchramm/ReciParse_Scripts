@@ -1,0 +1,59 @@
+data:
+  cmd: python -m spacy run data
+  script:
+    - python ./scripts/parse_data.py assets/batch1all120.jsonl data/train.spacy data/dev.spacy
+      data/test.spacy
+  deps:
+    - path: assets/batch1all120.jsonl
+      md5: 30ab60337539032dc3f43246709ce005
+  outs:
+    - path: data/train.spacy
+      md5: ee49ec2bf3cb3e9cee6165502c17892a
+    - path: data/dev.spacy
+      md5: 3bb746ef1b1e41d1fa2016f422e938cb
+    - path: data/test.spacy
+      md5: c45d67c058a82279c8a347fc0c82a64f
+  spacy_version: 3.0.0rc2
+  spacy_git_version: ace6ae435
+train_cpu:
+  cmd: python -m spacy run train_cpu
+  script:
+    - python -m spacy train configs/rel_tok2vec.cfg --output training --paths.train
+      data/train.spacy --paths.dev data/dev.spacy -c ./scripts/custom_functions.py
+  deps:
+    - path: data/train.spacy
+      md5: ee49ec2bf3cb3e9cee6165502c17892a
+    - path: data/dev.spacy
+      md5: 3bb746ef1b1e41d1fa2016f422e938cb
+  outs:
+    - path: training/model-best
+      md5: 5f39b04842c71c615920d9a1602f2216
+  spacy_version: 3.0.0rc2
+  spacy_git_version: ace6ae435
+evaluate:
+  cmd: python -m spacy run evaluate
+  script:
+    - python ./scripts/evaluate.py training/model-best data/test.spacy False
+  deps:
+    - path: training/model-best
+      md5: 5f39b04842c71c615920d9a1602f2216
+    - path: data/test.spacy
+      md5: c45d67c058a82279c8a347fc0c82a64f
+  outs: []
+  spacy_version: 3.0.0rc2
+  spacy_git_version: ace6ae435
+format:
+  cmd: python -m spacy run format
+  script:
+    - python ./scripts/lc_prodigy_format.py ner_model/model-best-ner training/model-best
+      assets/input1.json
+  deps:
+    - path: ner_model/model-best-ner
+      md5: 6953ee4b22870ba50bbaa04a27419db9
+    - path: training/model-best
+      md5: 94fbc76354261a9ce1a0b1db1b9dd537
+    - path: assets/input1.json
+      md5: c06b4ac81a13d9e727cef61441f57d35
+  outs: []
+  spacy_version: 3.0.0rc2
+  spacy_git_version: ace6ae435

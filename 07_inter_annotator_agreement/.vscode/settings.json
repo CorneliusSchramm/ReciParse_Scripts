@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/opt/anaconda3/envs/prodigy-env/bin/python",
+    "jupyter.jupyterServerType": "local"
+}
