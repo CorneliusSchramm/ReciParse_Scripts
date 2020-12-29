@@ -3,11 +3,10 @@ import json
 
 
 # Pfad to json/jsonl, dass ausgebessert werden soll
-input_path = "/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/01-Data/12_annotated_batches/combined/batch1+2/batch1+2_all_f.jsonl"
+input_path = "/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/01-Data/12_annotated_batches/batch1_jonathan.jsonl"
 
 #Pfad für output json
-output_path = "/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/01-Data/12_annotated_batches/combined/batch1+2/batch1+2_all_fi.jsonl"
-
+output_path = ""
 
 with open(input_path, "r", encoding="utf8") as json_file:
     annotated_recipes = [json.loads(line) for line in json_file]
@@ -26,4 +25,4 @@ for index, row in data.iterrows():
                 pass
 
 
-data.to_json(output_path, orient = "records", force_ascii=False, lines=True)
+data.to_json(output_path, orient = "records")

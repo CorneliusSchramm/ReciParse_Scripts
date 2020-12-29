@@ -18,8 +18,8 @@ def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.6):
     # Load JSON into list
     with open(file_path, "r", encoding="utf8") as json_file:
         # data = [json.loads(line) for line in json_file if json.loads(line)["answer"]=="accept"]
-        # data = [rec for rec in json.load(json_file) if rec["answer"]== "accept"]
-        data = [ rec for rec in json.load(json_file) ]
+        data = [rec for rec in json.load(json_file) if rec["answer"]== "accept"]
+        
     # Checking Length
     data_len = len(data)
     print(f"Number of accepted recipes: {len(data)}")
@@ -54,6 +54,6 @@ def train_dev_test_split(input_file: Path, output_dir: Path, train_split = 0.6):
             json.dump(data, f)
 
 train_dev_test_split (
-        input_file = r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/01-Data/12_annotated_batches/combined/batch1+2/batch1+2_all_dts.json",
-        output_dir= r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/01-Data/12_annotated_batches/combined/batch1+2/split"
+        input_file = r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/01-Data/12_annotated_batches/batch2/batch2_all_dts.json",
+        output_dir= r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/01-Data/12_annotated_batches/batch2/batch2_split"
     )
