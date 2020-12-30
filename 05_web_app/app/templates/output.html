@@ -52,6 +52,7 @@
  -->
 <!-- 2. Reihe für Model Predictions -->
 <!-- style="background-color: rgba(119, 195, 112, 0.2)" -->
+
 <div class = "row" >
     <!-- style="background-color: rgba(165, 112, 195, 0.2)" -->
     <!-- <div class = "col-3" style= "padding: 0px;" >
@@ -61,7 +62,12 @@
     </div> -->
     <form  class="col-3 " method = "POST" action = "\output">
         <div class="d-table-cell w-100 ">
-            <input name="rawtext" class="form-control mr-1 custom-box left-box custom-box" placeholder="Paste your recipe in here and hit 'Submit'">
+            <textarea name = "rawtext" cols = "30" class="form-control mr-1 custom-box left-box custom-box" placeholder="Paste your recipe in here and hit 'Submit'" 
+            style="resize:none; height:500px"> </textarea>
+            <input type="submit">
+
+            <!-- altes input Feld: -->
+            <!-- <input name="rawtext" class="form-control mr-1 custom-box left-box custom-box" placeholder="Paste your recipe in here and hit 'Submit'"> -->
         </div>
     </form>
     <!-- style="background-color: rgba(112, 148, 195, 0.2)" -->
