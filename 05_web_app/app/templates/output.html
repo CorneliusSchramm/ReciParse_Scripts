@@ -3,7 +3,8 @@
 
 <!-- Form user Input, erste Reihe -->
 
-<div class="container" style= "margin-bottom: 20px; margin-top: 0px;">
+<!-- Backup: -->
+<!-- <div class="container" style= "margin-bottom: 20px; margin-top: 0px;">
     <form  method = "POST" action = "\output">
         <div class="d-table-cell align-middle">
             <button class="btn btn-primary" type="reset">Clear</button>  
@@ -15,7 +16,19 @@
             <button class="btn btn-outline-success" type="submit" style = "margin-left: 15px;">Submit </button>  
         </div>
     </form>
-</div>
+</div> -->
+<!-- Backup-Ende -->
+
+<!-- <div class="container">
+    <form  method = "POST" action = "\output">
+        <div class="d-table-cell w-100">
+            <input name="rawtext" class="form-control mr-1 custom-box left-box" placeholder="Paste your recipe in here and hit 'Submit'!!!!!!!!">
+        </div>
+        <div class="d-table-cell align-middle">
+            <button class="btn btn-outline-success" type="submit" style = "margin-left: 15px;">Submit </button>  
+        </div>
+    </form>
+</div> -->
 
     <!-- <form method = "POST" action = "\output">
         <label for="exampleFormControlTextarea1"></label>
@@ -34,17 +47,23 @@
                 </div> 
         </form> 
     </div>  -->
-</div>
-
+<!-- </div> -->
+<!-- <img src="/Users/leonidas/ReciParse_Scripts/05_web_app/app/static/DSC09713-2.jpg" class="center">
+ -->
 <!-- 2. Reihe für Model Predictions -->
 <!-- style="background-color: rgba(119, 195, 112, 0.2)" -->
 <div class = "row" >
     <!-- style="background-color: rgba(165, 112, 195, 0.2)" -->
-    <div class = "col-3" style= "padding: 0px;" >
+    <!-- <div class = "col-3" style= "padding: 0px;" >
         <div class="custom-box left-box">
             {{ demo_text }}
         </div>
-    </div>
+    </div> -->
+    <form  class="col-3 " method = "POST" action = "\output">
+        <div class="d-table-cell w-100 ">
+            <input name="rawtext" class="form-control mr-1 custom-box left-box custom-box" placeholder="Paste your recipe in here and hit 'Submit'">
+        </div>
+    </form>
     <!-- style="background-color: rgba(112, 148, 195, 0.2)" -->
     <div class = "col-6" >
         <div class="custom-box">
@@ -63,5 +82,30 @@
         </div>
     </div>
 </div>
+
+<!-- Backup:  -->
+<!-- <div class = "row" >
+    <div class = "col-3" style= "padding: 0px;" >
+        <div class="custom-box left-box">
+            {{ demo_text }}
+        </div>
+    </div>
+    <div class = "col-6" >
+        <div class="custom-box">
+            {{ demo_result|markdown }} 
+        </div>
+    </div>
+    <div class = "col-3" style= "padding: 0px;">
+        <div class="custom-box right-box">
+            {% for step in steps_list %}
+                <strong>{{ step[0] }}</strong><br>
+                {% for item in step[1].items()%}
+                    {{item}} <br>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div> -->
+<!-- Backup: Ende -->
 
 {% endblock content %}

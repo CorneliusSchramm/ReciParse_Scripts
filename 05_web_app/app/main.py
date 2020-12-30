@@ -16,11 +16,17 @@ import rel_model
 import custom_functions
 
 # Load Models
-ner_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\NER trained on nightly\ner-cb1-159-15-12")
-# rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
-rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\16-12_relations_tok2vec")
+# Cocos paths
+# ner_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\NER trained on nightly\ner-cb1-159-15-12")
+# # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+# rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\16-12_relations_tok2vec")
 
+# Leos paths
+ner_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
+# rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
 print("models loaded")
+
 # Initialize App
 app = Flask(__name__)
 Markdown(app)
