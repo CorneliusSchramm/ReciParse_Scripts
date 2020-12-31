@@ -5,6 +5,12 @@ from spacy.tokens import Doc, Span
 from thinc.types import Floats2d, Ints1d, Ragged, cast
 from thinc.api import Model, Linear, chain, Logistic
 
+VERBS_TO_OTHER = True 
+DIFF_FRONT_BACK = True      #Differentiate between token distance front and back? (auch in rel_model anpassen)
+FRONT = 10                  #vor Verb in Richtung Satzende
+BACK = 30                   #hinter verb in Richtung Satzanfang
+
+
 @spacy.registry.architectures.register("rel_model.v1")
 def create_relation_model(
     create_instance_tensor: Model[List[Doc], Floats2d],
@@ -25,7 +31,7 @@ def create_classification_layer(
 
 
 @spacy.registry.misc.register("rel_instance_generator.v1")
-def create_instances(max_length: int, VERBS_TO_OTHER, DIFF_FRONT_BACK, FRONT, BACK) -> Callable[[Doc], List[Tuple[Span, Span]]]:
+def create_instances(max_length: int) -> Callable[[Doc], List[Tuple[Span, Span]]]:
     def get_instances(doc: Doc) -> List[Tuple[Span, Span]]:
         instances = []
         for ent1 in doc.ents:

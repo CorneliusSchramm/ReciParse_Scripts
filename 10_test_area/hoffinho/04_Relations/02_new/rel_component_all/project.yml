@@ -41,7 +41,7 @@ commands:
   - name: "data"
     help: "Parse the gold-standard annotations from the Prodigy annotations."
     script:
-      - "python ./scripts/parse_data.py ${vars.annotations} ${vars.train_file} ${vars.dev_file} ${vars.test_file}"
+      - "python ./scripts/parse_data_new_v0.02.py ${vars.annotations} ${vars.train_file} ${vars.dev_file} ${vars.test_file}"
     deps:
       - ${vars.annotations}
     outputs:
