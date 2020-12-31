@@ -1,14 +1,6 @@
 body {
     background: #FBFAF8;
-/*    margin-top: 5rem;*/
   }
-  
-/*  .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }*/
 
 .custom-box{
   background-color: white;
@@ -16,8 +8,8 @@ body {
   padding: 20px; 
   border-radius: 10px;
   overflow: auto;
-  scrollbar-width: none;  /* Firefox */
-  -ms-overflow-style: none; /* Interexplorer */
+  scrollbar-width: 2px;  /* Firefox */
+  -ms-overflow-style: 2px; /* Interexplorer */
   height: 500px;
   box-shadow:
   0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -69,8 +61,4 @@ body {
   0 22.3px 17.9px rgba(0, 0, 0, 0.012),
   0 41.8px 33.4px rgba(0, 0, 0, 0.006),
   0 100px 80px rgba(0, 0, 0, 0.06)
-}
-
-textarea {
-  resize: : none;
 }
