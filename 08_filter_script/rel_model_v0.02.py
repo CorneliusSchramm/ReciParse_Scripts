@@ -5,10 +5,11 @@ from spacy.tokens import Doc, Span
 from thinc.types import Floats2d, Ints1d, Ragged, cast
 from thinc.api import Model, Linear, chain, Logistic
 
-VERBS_TO_OTHER = True 
+# Filter
 DIFF_FRONT_BACK = True      #Differentiate between token distance front and back?
 FRONT = 10                  #vor Verb in Richtung Satzende
 BACK = 30                   #hinter verb in Richtung Satzanfang
+VERBS_TO_OTHER = True 
 
 
 @spacy.registry.architectures.register("rel_model.v1")

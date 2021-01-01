@@ -12,14 +12,14 @@ msg = Printer()
 # Filter
 
 ## Token Length (auch in rel_model & config anpassen)
-TOKEN_LENGTH = 1000          #to front and back
-DIFF_FRONT_BACK = False     #Set to True if differentiate between token distance front and back? (auch in rel_model anpassen)
-FRONT = 10                  #vor Verb in Richtung Satzende
-BACK = 30                   #hinter verb in Richtung Satzanfang
+TOKEN_LENGTH = 50           #to front and back
+DIFF_FRONT_BACK = True      #Set to True if differentiate between token distance front and back? (auch in rel_model anpassen)
+FRONT = 5                   #vor Verb in Richtung Satzende
+BACK = 20                   #hinter verb in Richtung Satzanfang
 
 ## Entity Type and Args
-VERBS_TO_OTHER = False      #auch in rel_model anpassen
-DETAILED_ARGS = False       #set to True if detailed args (Arg1Z etc)
+VERBS_TO_OTHER = True      #auch in rel_model anpassen
+DETAILED_ARGS = True       #set to True if detailed args (Arg1Z etc)
 
 
 
@@ -175,7 +175,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                             if ents_dict[x1][0] == "V":             #filter entity type
                                 for x2 in span_starts:
                                     if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
-                                        
+                                        #print(ents_dict[x1][0] + "-->" + ents_dict[x2][0] )
                                         #DIFF_FRONT_BACK 2a
                                         if DIFF_FRONT_BACK == True:
                                              if ((x1 - x2) >= 0 and (x1 - x2 ) <= BACK) or ((x1 - x2) < 0 and (x1 - x2) >= FRONT*-1):

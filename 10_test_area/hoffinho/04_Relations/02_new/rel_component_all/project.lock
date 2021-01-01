@@ -1,18 +1,18 @@
 data:
   cmd: python -m spacy run data
   script:
-    - python ./scripts/parse_data_new_v0.02.py assets/batch1_all_f.jsonl data/train.spacy
+    - python ./scripts/parse_data_new_v0.04.py assets/batch1_all_f.jsonl data/train.spacy
       data/dev.spacy data/test.spacy
   deps:
     - path: assets/batch1_all_f.jsonl
       md5: 6e233e341753e8654981d249cd074e36
   outs:
     - path: data/train.spacy
-      md5: 67f7aea148b98e89bf1fba1c75aeeec7
+      md5: 85365c99448f168075e83abb71583481
     - path: data/dev.spacy
-      md5: 44f188e8d44627177de13188257d741e
+      md5: c615bdc488d3aba02246d6160dfd4d8f
     - path: data/test.spacy
-      md5: bc3c55fb4f17af11b919a7af82b4a6f4
+      md5: 6acb11fcc9615d6dffb1041c5780324f
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 train_cpu:
