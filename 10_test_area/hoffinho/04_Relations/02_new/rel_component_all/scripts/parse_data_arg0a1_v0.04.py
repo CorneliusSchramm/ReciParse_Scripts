@@ -14,8 +14,8 @@ msg = Printer()
 ## Token Length (auch in rel_model & config anpassen)
 TOKEN_LENGTH = 30           #to front and back
 DIFF_FRONT_BACK = True      #Differentiate between token distance front and back? (auch in rel_model anpassen)
-FRONT = 10                  #vor Verb in Richtung Satzende
-BACK = 30                   #hinter verb in Richtung Satzanfang
+FRONT = 5                  #vor Verb in Richtung Satzende
+BACK = 20                   #hinter verb in Richtung Satzanfang
 
 ## Entity Type and Args
 VERBS_TO_OTHER = True       #auch in rel_model anpassen
@@ -40,14 +40,7 @@ MAP_LABELS_ARG1 = {
     "TOOL": "Arg1Tool"
 }
 
-MAP_LABELS_ARG = {
-    "ATTR": "ArgAttr",
-    "TEMP": "ArgTemp",
-    "DAUER": "ArgDauer",
-    "ZEITP": "ArgZeitp", 
-    "PRÄP": "ArgPräp" 
-
-}
+merged_labels = list(MAP_LABELS_ARG0.values()) + list(MAP_LABELS_ARG1.values())
 
 def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_split=0.2, test_split=0.1, train_split=0.7):
     """Creating the corpus from the Prodigy annotations."""
@@ -105,7 +98,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if VERBS_TO_OTHER == True: 
                             if ents_dict[x1][0] == "V":             #filter entity type
                                 for x2 in span_starts:
-                                    if ents_dict[x2][0] in ["ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
+                                    if ents_dict[x2][0] in ["Z","TOOL"]:      #filter entity type
                                         
                                         #DIFF_FRONT_BACK 1a
                                         if DIFF_FRONT_BACK == True:
@@ -146,13 +139,12 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         #DETAILED_ARGS 1a
                         if DETAILED_ARGS == True:
                             if label == "ARG0": 
-                                #label = MAP_LABELS_ARG0[ents_dict[end][0]]  #assign new label based on span type
-                                continue
+                                label = MAP_LABELS_ARG0[ents_dict[end][0]]  #assign new label based on span type
                             elif label == "ARG1":
-                                #label = MAP_LABELS_ARG1[ents_dict[end][0]]
-                                continue
+                                label = MAP_LABELS_ARG1[ents_dict[end][0]]
                             elif label == "ARG":
-                                label = MAP_LABELS_ARG[ents_dict[end][0]] 
+                                #label = MAP_LABELS_ARG[ents_dict[end][0]]
+                                continue 
                             else: 
                                 error_count_rel += 1 
                         #DETAILED_ARGS 1b
@@ -176,14 +168,14 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if VERBS_TO_OTHER == True: 
                             if ents_dict[x1][0] == "V":             #filter entity type
                                 for x2 in span_starts:
-                                    if ents_dict[x2][0] in ["ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
+                                    if ents_dict[x2][0] in ["Z","TOOL"]:      #filter entity type
                                         
                                         #DIFF_FRONT_BACK 2a
                                         if DIFF_FRONT_BACK == True:
                                              if ((x1 - x2) >= 0 and (x1 - x2 ) <= BACK) or ((x1 - x2) < 0 and (x1 - x2) >= FRONT*-1):
                                                  #DETAILED_ARGS 2a
                                                  if DETAILED_ARGS == True: 
-                                                    merged_labels = list(MAP_LABELS_ARG0.values()) + list(MAP_LABELS_ARG1.values()) + list(MAP_LABELS_ARG.values())
+                                                    
                                                     for label in merged_labels: 
                                                         if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                             neg += 1                            
@@ -200,7 +192,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                             if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= TOKEN_LENGTH:      #filter token distance (match with config?)
                                                 #DETAILED_ARGS 3a
                                                 if DETAILED_ARGS == True: 
-                                                    merged_labels = list(MAP_LABELS_ARG0.values()) + list(MAP_LABELS_ARG1.values()) + list(MAP_LABELS_ARG.values())
+                                                    
                                                     for label in merged_labels: 
                                                         if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                             neg += 1                            
@@ -219,7 +211,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                          if ((x1 - x2) >= 0 and (x1 - x2 ) <= BACK) or ((x1 - x2) < 0 and (x1 - x2) >= FRONT*-1):
                                              #DETAILED_ARGS 4a
                                              if DETAILED_ARGS == True: 
-                                                    merged_labels = list(MAP_LABELS_ARG0.values()) + list(MAP_LABELS_ARG1.values()) + list(MAP_LABELS_ARG.values())
+                                                    
                                                     for label in merged_labels: 
                                                         if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                             neg += 1                            
@@ -236,7 +228,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                         if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= TOKEN_LENGTH:      #filter token distance (match with config?)
                                             #DETAILED_ARGS 5a
                                             if DETAILED_ARGS == True: 
-                                                    merged_labels = list(MAP_LABELS_ARG0.values()) + list(MAP_LABELS_ARG1.values()) + list(MAP_LABELS_ARG.values())
+                                                    
                                                     for label in merged_labels: 
                                                         if label not in rels[(x1, x2)]:         #if label isn't assigned to span combination
                                                             neg += 1                            

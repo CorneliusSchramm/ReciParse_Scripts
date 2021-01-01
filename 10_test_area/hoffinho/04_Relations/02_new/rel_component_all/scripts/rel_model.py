@@ -41,7 +41,7 @@ def create_instances(max_length: int) -> Callable[[Doc], List[Tuple[Span, Span]]
             if VERBS_TO_OTHER == True: 
                 if ent1.label_ == "V":                 #filter entity type
                     for ent2 in doc.ents:
-                        if ent2.label_ in ["ATTR","TEMP","DAUER","ZEITP","PRÄP"]:         #filter entity type
+                        if ent2.label_ in ["Z","TOOL"]:         #filter entity type
                         #if ent1 != ent2:                #filter same entity
 
                             #DIFF_FRONT_BACK 1a
