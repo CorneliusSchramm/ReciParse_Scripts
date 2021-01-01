@@ -6,7 +6,6 @@ from pathlib import Path
 from spacy.tokens import Span, DocBin, Doc
 from spacy.vocab import Vocab
 from wasabi import Printer
-import
 
 msg = Printer()
 
