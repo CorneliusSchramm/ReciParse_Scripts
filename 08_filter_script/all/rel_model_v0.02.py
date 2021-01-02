@@ -7,8 +7,8 @@ from thinc.api import Model, Linear, chain, Logistic
 
 # Filter
 DIFF_FRONT_BACK = True      #Differentiate between token distance front and back?
-FRONT = 5                  #vor Verb in Richtung Satzende
-BACK = 20                   #hinter verb in Richtung Satzanfang
+FRONT = 10                  #vor Verb in Richtung Satzende
+BACK = 30                   #hinter verb in Richtung Satzanfang
 VERBS_TO_OTHER = True 
 
 
@@ -41,7 +41,7 @@ def create_instances(max_length: int) -> Callable[[Doc], List[Tuple[Span, Span]]
             if VERBS_TO_OTHER == True: 
                 if ent1.label_ == "V":                 #filter entity type
                     for ent2 in doc.ents:
-                        if ent2.label_ in ["Z","TOOL"]:         #filter entity type
+                        if ent2.label_ in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:         #filter entity type
                         #if ent1 != ent2:                #filter same entity
 
                             #DIFF_FRONT_BACK 1a

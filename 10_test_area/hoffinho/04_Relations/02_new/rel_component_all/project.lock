@@ -1,18 +1,18 @@
 data:
   cmd: python -m spacy run data
   script:
-    - python ./scripts/parse_data_new_v0.02.py assets/batch1_all_f.jsonl data/train.spacy
-      data/dev.spacy data/test.spacy
+    - python ./scripts/parse_data_arg0a1_v0.04.py /Users/jhoff/Desktop/batch1+2_all_fi.jsonl
+      data/train.spacy data/dev.spacy data/test.spacy
   deps:
-    - path: assets/batch1_all_f.jsonl
-      md5: 6e233e341753e8654981d249cd074e36
+    - path: /Users/jhoff/Desktop/batch1+2_all_fi.jsonl
+      md5: 23dd35aeba595fda6b7a759e08d54c43
   outs:
     - path: data/train.spacy
-      md5: 67f7aea148b98e89bf1fba1c75aeeec7
+      md5: 8a6e7d17884f2b6c15ec5f18bb27b47e
     - path: data/dev.spacy
-      md5: 44f188e8d44627177de13188257d741e
+      md5: e2573a8bedf18984f956d3e57959a138
     - path: data/test.spacy
-      md5: bc3c55fb4f17af11b919a7af82b4a6f4
+      md5: c7c28c0e26a924a3e479088c8fffdf03
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 train_cpu:
@@ -22,12 +22,12 @@ train_cpu:
       data/train.spacy --paths.dev data/dev.spacy -c ./scripts/custom_functions.py
   deps:
     - path: data/train.spacy
-      md5: 477edae1f79d8a7d9216b9762c6f1794
+      md5: 8a6e7d17884f2b6c15ec5f18bb27b47e
     - path: data/dev.spacy
-      md5: 8c48d51b0434f6479437da716dcb2e3e
+      md5: e2573a8bedf18984f956d3e57959a138
   outs:
     - path: training/model-best
-      md5: 49e6ecf2d38eefc66fd05e4131273d77
+      md5: b7dc6d370ed908e08ddd31d807442da9
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 evaluate:

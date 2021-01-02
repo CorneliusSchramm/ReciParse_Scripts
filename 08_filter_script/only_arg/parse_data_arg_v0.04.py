@@ -105,7 +105,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if VERBS_TO_OTHER == True: 
                             if ents_dict[x1][0] == "V":             #filter entity type
                                 for x2 in span_starts:
-                                    if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
+                                    if ents_dict[x2][0] in ["ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
                                         
                                         #DIFF_FRONT_BACK 1a
                                         if DIFF_FRONT_BACK == True:
@@ -146,9 +146,11 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         #DETAILED_ARGS 1a
                         if DETAILED_ARGS == True:
                             if label == "ARG0": 
-                                label = MAP_LABELS_ARG0[ents_dict[end][0]]  #assign new label based on span type
+                                #label = MAP_LABELS_ARG0[ents_dict[end][0]]  #assign new label based on span type
+                                continue
                             elif label == "ARG1":
-                                label = MAP_LABELS_ARG1[ents_dict[end][0]]
+                                #label = MAP_LABELS_ARG1[ents_dict[end][0]]
+                                continue
                             elif label == "ARG":
                                 label = MAP_LABELS_ARG[ents_dict[end][0]] 
                             else: 
@@ -174,7 +176,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         if VERBS_TO_OTHER == True: 
                             if ents_dict[x1][0] == "V":             #filter entity type
                                 for x2 in span_starts:
-                                    if ents_dict[x2][0] in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
+                                    if ents_dict[x2][0] in ["ATTR","TEMP","DAUER","ZEITP","PRÄP"]:      #filter entity type
                                         
                                         #DIFF_FRONT_BACK 2a
                                         if DIFF_FRONT_BACK == True:

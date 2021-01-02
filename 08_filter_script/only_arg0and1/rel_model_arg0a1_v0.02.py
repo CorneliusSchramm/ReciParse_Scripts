@@ -5,10 +5,11 @@ from spacy.tokens import Doc, Span
 from thinc.types import Floats2d, Ints1d, Ragged, cast
 from thinc.api import Model, Linear, chain, Logistic
 
-VERBS_TO_OTHER = True 
-DIFF_FRONT_BACK = True      #Differentiate between token distance front and back? (auch in rel_model anpassen)
+# Filter
+DIFF_FRONT_BACK = True      #Differentiate between token distance front and back?
 FRONT = 10                  #vor Verb in Richtung Satzende
 BACK = 30                   #hinter verb in Richtung Satzanfang
+VERBS_TO_OTHER = True 
 
 
 @spacy.registry.architectures.register("rel_model.v1")
@@ -36,26 +37,30 @@ def create_instances(max_length: int) -> Callable[[Doc], List[Tuple[Span, Span]]
         instances = []
         for ent1 in doc.ents:
 
+            #VERBS_TO_OTHER 1a
             if VERBS_TO_OTHER == True: 
                 if ent1.label_ == "V":                 #filter entity type
                     for ent2 in doc.ents:
-                        if ent2.label_ in ["Z","TOOL","ATTR","TEMP","DAUER","ZEITP","PRÄP"]:         #filter entity type
+                        if ent2.label_ in ["Z","TOOL"]:         #filter entity type
                         #if ent1 != ent2:                #filter same entity
 
+                            #DIFF_FRONT_BACK 1a
                             if DIFF_FRONT_BACK == True: 
                                 if ((ent1.start - ent2.start) >= 0 and (ent1.start - ent2.start) <= BACK) or ((ent1.start - ent2.start) < 0 and (ent1.start - ent2.start) >= FRONT*-1):
                                      instances.append((ent1, ent2))
-
+                            #DIFF_FRONT_BACK 1b
                             else: 
                                 if max_length and abs(ent2.start - ent1.start) <= max_length:
                                      instances.append((ent1, ent2))
-            
+            #VERBS_TO_OTHER 1b
             else: 
                 for ent2 in doc.ents:
+                    #DIFF_FRONT_BACK 2a
                     if DIFF_FRONT_BACK == True: 
                         if ((ent1.start - ent2.start) >= 0 and (ent1.start - ent2.start) <= BACK) or ((ent1.start - ent2.start) < 0 and (ent1.start - ent2.start) >= FRONT*-1):
                                 instances.append((ent1, ent2))
 
+                    #DIFF_FRONT_BACK 2b
                     else: 
                         if max_length and abs(ent2.start - ent1.start) <= max_length:
                                 instances.append((ent1, ent2)) 
