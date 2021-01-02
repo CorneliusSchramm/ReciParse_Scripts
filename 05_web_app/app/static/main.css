@@ -62,3 +62,10 @@ body {
   0 41.8px 33.4px rgba(0, 0, 0, 0.006),
   0 100px 80px rgba(0, 0, 0, 0.06)
 }
+
+strong{
+  display: inline-block;
+  width: auto;
+  border: 1px solid #000;
+  text-align: center;
+}

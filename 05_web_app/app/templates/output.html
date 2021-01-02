@@ -1,12 +1,25 @@
 {% extends "layout.html" %}
 {% block content%}
 
+
+<!-- Function to submit text on enter -->
+<script>
+    function pressed(e) {
+        // Has the enter key been pressed?
+        if ( (window.event ? event.keyCode : e.which) == 13) { 
+            // If it has been so, manually submit the <form>
+            document.forms[0].submit();
+        }
+    }
+</script>
+
+
 <div class = "row" >
 
     <!-- Linke Spalte -->
     <form  class="col-3" method = "POST" action = "\output">
         <div>
-            <textarea name = "rawtext" cols = "30" class="form-control custom-box left-box" placeholder="Paste your recipe in here and hit 'Submit'"style="height:500px; resize: none;"></textarea>
+            <textarea onkeydown="pressed(event)" name = "rawtext" cols = "30" class="form-control custom-box left-box" placeholder="Paste your recipe in here and hit 'Submit'"style="height:500px; resize: none;"></textarea>
             <input type="submit">
         </div>
     </form>
@@ -22,18 +35,13 @@
     <div class = "col-3">
         <div class="custom-box right-box">
             {% for step in steps_list %}
-                <strong>{{ step[0] }}</strong><br>
+                <strong>{{loop.index}}. {{ step[0] }}</strong><br>
                 {% for item in step[1].items()%}
-                    {{item}} <br>
-                {% endfor %}
+                    {{item}}<br>
+                {% endfor %}<br>
             {% endfor %}
         </div>
     </div>
-
-<h1>A Web Page</h1>
-<p id=“demo”>A Paragraph.</p>
-<button type=“button” onclick=“myFunction()“>Try it</button>
-
 </div>
 
 {% endblock content %}
