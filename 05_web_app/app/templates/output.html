@@ -13,6 +13,10 @@
     }
 </script>
 
+<div class = "row">
+    <img src="{{ url_for('static', filename = 'Unknown.png')}}">
+</div>
+
 
 <div class = "row" >
 
@@ -20,7 +24,6 @@
     <form  class="col-3" method = "POST" action = "\output">
         <div>
             <textarea onkeydown="pressed(event)" name = "rawtext" cols = "30" class="form-control custom-box left-box" placeholder="Paste your recipe in here and hit 'Submit'"style="height:500px; resize: none;"></textarea>
-            <input type="submit">
         </div>
     </form>
 
@@ -35,10 +38,18 @@
     <div class = "col-3">
         <div class="custom-box right-box">
             {% for step in steps_list %}
+            <div class = "step">
                 <strong>{{loop.index}}. {{ step[0] }}</strong><br>
+
                 {% for item in step[1].items()%}
-                    {{item}}<br>
-                {% endfor %}<br>
+                    {{item[0]}}: 
+
+                    {% for ent in item[1]%}
+                        {{ent}} <br>
+
+                    {% endfor %}
+                {% endfor %}
+            </div>
             {% endfor %}
         </div>
     </div>
