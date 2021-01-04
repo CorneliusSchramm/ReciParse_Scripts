@@ -2,19 +2,8 @@
 {% block content%}
 
 
-<!-- Function to submit text on enter -->
-<script>
-    function pressed(e) {
-        // Has the enter key been pressed?
-        if ( (window.event ? event.keyCode : e.which) == 13) { 
-            // If it has been so, manually submit the <form>
-            document.forms[0].submit();
-        }
-    }
-</script>
-
 <div class = "row">
-    <img src="{{ url_for('static', filename = 'Unknown.png')}}">
+    <a class="logo" href="/"><img src="{{ url_for('static', filename = 'Unknown.png')}}"></a>
 </div>
 
 
@@ -23,7 +12,13 @@
     <!-- Linke Spalte -->
     <form  class="col-3" method = "POST" action = "\output">
         <div>
-            <textarea onkeydown="pressed(event)" name = "rawtext" cols = "30" class="form-control custom-box left-box" placeholder="Paste your recipe in here and hit 'Submit'"style="height:500px; resize: none;"></textarea>
+            <textarea 
+                name = "rawtext" cols = "30" 
+                class="form-control custom-box left-box" 
+                id="input-text"
+                placeholder="Paste your recipe here and hit 'Enter' to submit"
+                onkeydown="pressed(event)" 
+                style="height:500px; resize: none;"></textarea>
         </div>
     </form>
 

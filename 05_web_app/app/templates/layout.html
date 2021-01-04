@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-
+<!-- Head -->
   <head>
-    <!-- Required meta tags -->
+<!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+<!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'main.css')}}" >
 
@@ -19,29 +19,41 @@
   </head>
 
 
-
+<!-- Body -->
   <body>
     <div class="container-fluid">
-      {% block content %}{% endblock %}
+      <div class="content-wrap">
+        {% block content %}{% endblock %}
+      </div>
     </div>
-    
-    <script> $(document).ready(function () {
-      if (!$.browser.webkit) {$('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');}});
-    </script>
-
-
-
-    <script src="{{url_for('static', filename='main.js')}}"></script>
-
 
     <footer>
         <div class = "footer-left">Reciparse 2021</div>
-
         <div class = "footer-right"> Jonathan Ebner, Leonidas Graf von Bothmer, Jona David Hoffmann, Cornelius Schramm</div>
-    
     </footer>
 
+<!-- Scripts -->
+<!--     <script> $(document).ready(function () {
+      if (!$.browser.webkit) {$('.wrapper').html('<p>Sorry! Non webkit users. :(</p>');}});
+    </script> -->
+    
+    <script src="{{url_for('static', filename='main.js')}}"></script>
+    <!-- Function to submit text on enter -->
+    <script>
+        function pressed(e) {
+            // Has the enter key been pressed?
+            if ( (window.event ? event.keyCode : e.which) == 13) { 
+                // If it has been so, manually submit the <form>
+                document.forms[0].submit();
+                var x = String(document.getElementById("input-text").value);
+
+                //document.getElementById("input").innerHTML = x;
+                document.getElementById("input-text").placeholder = x
+
+                console.log(x);
+            }
+        }
+    </script>
+
   </body>
-
-
 </html>

@@ -1,6 +1,37 @@
 body {
     background: #FBFAF8;
+    /*min-height: 100%;*/
   }
+
+strong {
+  color: #345672;
+}
+
+footer{
+  color: rgba(0,0,0,0.3);
+  font-size: 0.8rem;
+  padding: 50px 10px 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0.5rem;  
+}
+
+img {
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.container-fluid {
+  position: relative;
+  min-height: 100vh;
+}
+.content-wrap {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 0.5rem;    /* Footer height */
+}
 
 .custom-box{
   background-color: white;
@@ -17,14 +48,10 @@ body {
   0 12.5px 10px rgba(0, 0, 0, 0.04),
   0 22.3px 17.9px rgba(0, 0, 0, 0.052),
   0 41.8px 33.4px rgba(0, 0, 0, 0.056),
-  0 100px 80px rgba(0, 0, 0, 0.07)
-;
+  0 100px 80px rgba(0, 0, 0, 0.07);
 }
-.left-box{
-  margin-left:0px ;
-}
-.right-box{
-  margin-right:0px ;
+.custom-box {
+  border: none;
 }
 .custom-box::-webkit-scrollbar-track
 {
@@ -39,16 +66,11 @@ body {
   background-color:rgba(0,0,0,0);
   margin: 5px;
 }
-
 .custom-box::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0);
   background-color: #e0e0e0;
   margin: 5px;
-}
-
-.left-box{
-  border: none;
 }
 
 .form-control:focus {
@@ -63,31 +85,56 @@ body {
   0 100px 80px rgba(0, 0, 0, 0.06)
 }
 
-img{
+.left-box{
+  margin-left:0px;
+}
+.right-box{
+  margin-right:0px;
+  margin-left:0px;
+  padding-top:9px;
+}
+
+
+.logo {
   display: block;
   width: 250px;
-  margin: 50px auto;
+  margin: 25px auto;
 }
 
 .step{
   border-radius: 10px;
-  background-color:rgba(5,6,34,0.3);
+  background-color: rgba(52, 86, 114,0.1);
   margin: 13px 0;
   padding: 5px 13px 10px;
-}
-
-footer{
-  border-color:rgba(52, 86, 114, 0)
-  background-color: black;
-  color: rgba(0,0,0,0.3);
-  font-size: 0.8rem;
-  margin: 50px 10px 20px;
 }
 
 .footer-left{
   float: left;
 }
-
 .footer-right{
-  float:right;
+  float: right;
+}
+
+.home-box {
+  display: block;
+  margin: 20px auto;
+  width: 40%;
+  box-shadow: none;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 25px;
+  height: 70px;
+  resize: none;
+}
+
+.get-lucky {
+  color:#345672;
+  font-weight:bold;
+  display:block;
+  margin: 25px auto;
+}
+.get-lucky:hover {
+  color: rgba(52, 86, 114,0.5);
+}
+.get-lucky:active {
+  color: rgba(52, 86, 114,0.75);
 }

@@ -22,14 +22,14 @@ import custom_functions
 # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\16-12_relations_tok2vec")
 
 # Leos paths
-# ner_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
-# rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
-# rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
+ner_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
+#rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
 
 # Jonathans paths
-ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
-# rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
-rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
+# ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
+# # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+# rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
 
 print("models loaded")
 
@@ -81,15 +81,13 @@ def columns():
         # print(steps_list)
 
         # --- Display NE with displacy ---
+        r,g,b = "#ECC1C9", "#BCDCD0", "#C3CEEA"
+
         colors = {
-            "V": "#F4927E", 
-            "Z":"#739DBF", 
-            "TOOL": "#C7D7E5", 
-            "TEMP": "#00F5AF" , 
-            "ATTR": "#00F5AF",
-            "ZEITP": "#00F5AF",
-            "DAUER": "#00F5AF", 
-            "PRÄP":  "#00F5AF"}
+            "V": r, 
+            "Z":g, "TOOL": g, 
+            "TEMP": b, "ATTR": b, "PRÄP":  b, "ZEITP": b, "DAUER": b, 
+}
             
         my_options = {"ents": ["V","Z", "TOOL", "TEMP", "ATTR","ZEITP","DAUER", "PRÄP" ], "colors": colors}
         demo_html = displacy.render(pred, style= "ent", options=my_options)

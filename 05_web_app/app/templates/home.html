@@ -1,17 +1,40 @@
 {% extends "layout.html" %}
 {% block content%}
-<div class="container" style= "margin-bottom: 20px; margin-top: 0px;">
-  <form  method = "POST" action = "\output">
-      <div class="d-table-cell align-middle">
-          <button class="btn btn-primary" type="reset">Clear</button>  
-      </div>
-      <div class="d-table-cell w-100">
-          <input name="rawtext" class="form-control" placeholder="Paste your recipe in here and hit 'Submit'">
-      </div>
-      <div class="d-table-cell align-middle">
-          <button class="btn btn-outline-success" type="submit" >Submit </button>  
-      </div>
+
+<div class = "row">
+    <a class="logo" href="/"><img src="{{ url_for('static', filename = 'Unknown.png')}}"></a>
+</div>
+
+<div class="row">
+  <form class="w-100" method = "POST" action = "\output">
+      <textarea 
+            name = "rawtext" cols = "30" 
+            class="form-control custom-box home-box" 
+            id="input-text"
+            placeholder="Paste your recipe here and hit 'Enter' to submit"
+            onkeydown="pressed(event)"></textarea>
+      <button class="btn get-lucky" id="get-lucky" onclick="getLucky()" type="submit">GET LUCKY!</button>  
   </form>
 </div>
+
+<script type="text/javascript">
+  const tx = document.getElementsByTagName('textarea');
+  for (let i = 0; i < tx.length; i++) {
+    tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+    tx[i].addEventListener("input", OnInput, false);
+  }
+
+  function OnInput() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+  }
+
+  function getLucky() {
+    var text_list = ["Zwiebel und Fenchel in kleine Würfel schneiden. Dabei das Fenchelgrün für später aufheben.Zwiebeln und Fenchel zusammen im Olivenöl etwas anbraten. Dazu kommt der Risottoreis, bis er glasig ist. Mit dem Weißwein ablöschen und den Wein einkochen lassen. Den gepressten oder ganz klein geschnittenen Knoblauch dazugeben. Gemüsebrühe in kleinen Portionen dazugießen und unter Rühren einkochen lassen, dann wieder Brühe und wieder rührend einkochen lassen. Wenn etwa die Hälfte Gemüsebrühe verbraucht ist, kommen die Kapern dazu. Wenn der Reis gar ist und die gesamte Brühe aufgenommen hat, das Mandelmus und die Hefeflocken einrühren. Zuletzt den Abrieb der Zitrone, Fenchelgrün und Basilikum untermengen. Abschmecken mit Pfeffer, Zitronensaft und ggf. etwas Salz. Garnieren mit Fenchelgrün.","Die Eier kochen.","Das Fleisch schneiden" ];
+    var text = text_list[Math.floor(Math.random()*text_list.length)];
+    document.getElementById("input-text").value = "";
+    document.getElementById("input-text").value += text;
+  }
+</script>
  
 {% endblock content %}
