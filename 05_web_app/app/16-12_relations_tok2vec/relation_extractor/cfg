@@ -1,0 +1,18 @@
+{
+  "labels":[
+    "ArgPr\u00e4p",
+    "Arg0Z",
+    "Arg0Tool",
+    "Arg1Z",
+    "Arg1Tool",
+    "ArgAttr",
+    "ArgTemp",
+    "ArgDauer",
+    "ArgZeitp",
+    "ArgNone",
+    "ARG",
+    "ARG1",
+    "ARG0"
+  ],
+  "threshold":0.5
+}
