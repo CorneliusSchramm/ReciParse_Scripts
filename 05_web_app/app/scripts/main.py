@@ -1,6 +1,8 @@
 from flask import Flask, render_template, url_for, request
 from flaskext.markdown import Markdown
 
+import typer
+
 # Importing NLP Stuff
 import spacy
 from spacy import displacy
@@ -9,9 +11,9 @@ from spacy import displacy
 # New Tokenizer
 
 # For Rel Model
-import rel_pipe
-import rel_model
-import custom_functions
+from scripts import rel_pipe
+from scripts import rel_model
+from scripts import custom_functions
 
 # Load Models
 # Cocos paths
@@ -24,17 +26,16 @@ import custom_functions
 #rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
 #rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
 
-# make the factory work
-#from rel_pipe import make_relation_extractor, score_relations
+#make the factory work
+from scripts.rel_pipe import make_relation_extractor, score_relations
 
-# make the config work
-# from rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
+#make the config work
+from scripts.rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
 
 # Jonathans paths
 ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
 # # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
 rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
-#rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/04-performance/rel-trf-01_04-coco/training/model-best")
 
 print("models loaded")
 
