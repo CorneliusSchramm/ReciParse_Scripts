@@ -35,6 +35,20 @@
             {% for step in steps_list %}
             <div class = "step">
                 <strong>{{loop.index}}. {{ step[0] }}</strong><br>
+<!-- 
+                {% for item in step[1].items()%}
+                    {% if item[0].shift|string() == 'Arg0Z' %}
+                        {{Zutaten}}:
+                    {% else %}
+                        {{item[0]}}:
+                    {% endif %}
+
+                    {% for ent in item[1]%}
+                        {{ent}} <br>
+
+                    {% endfor %}
+                {% endfor %} -->
+
 
                 {% for item in step[1].items()%}
                     {{item[0]}}: 
@@ -44,6 +58,7 @@
 
                     {% endfor %}
                 {% endfor %}
+                
             </div>
             {% endfor %}
         </div>
