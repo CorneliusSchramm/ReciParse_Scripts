@@ -19,7 +19,7 @@ footer{
 
 img {
   display: block;
-  width: 250px;
+  width: 300px;
   margin: 0 auto;
 }
 
@@ -97,8 +97,8 @@ img {
 
 .logo {
   display: block;
-  width: 250px;
-  margin: 25px auto;
+  width: 500px;
+  margin: 45px auto 30px;
 }
 
 .step{
