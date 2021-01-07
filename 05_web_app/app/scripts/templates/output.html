@@ -51,8 +51,8 @@
 
 
                 {% for item in step[1].items()%}
-                    {{item[0]}}: 
-                        <!-- {{item[1]}} -->
+                    {{labels_dict[item[0]]}}: 
+                    <!-- {{item}} -->
                     {% for ent in item[1]%}
                         {{ent}} <br>
 

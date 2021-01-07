@@ -27,10 +27,10 @@ import custom_functions
 # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\16-12_relations_tok2vec")
 
 # Leos paths
-#ner_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
-#rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
-#rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
-
+ner_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
+# rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
+# rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/04-performance/rel-trf-01_04-coco/training/model-best")
 #make the factory work
 from rel_pipe import make_relation_extractor, score_relations
 
@@ -38,11 +38,12 @@ from rel_pipe import make_relation_extractor, score_relations
 from rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
 
 # Jonathans paths
-ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
-# # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
-#rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
-rel_nlp = spacy.load(r"/Users/jonathanebner/Desktop/app_transformer/model/rel_trans")
+# ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
+# # # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+# #rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
+# rel_nlp = spacy.load(r"/Users/jonathanebner/Desktop/app_transformer/model/rel_trans")
 print("models loaded")
+
 
 # Initialize App
 app = Flask(__name__)
@@ -76,6 +77,8 @@ def columns():
 
         # Extract Steps from relations
         v_list = [(ent.start, ent.text) for ent in pred.ents if ent.label_ == "V" ]
+        
+        ents_dict = { ent.start: ent.text for ent in pred.ents}
 
         threshhold = 0.05
         steps_list = []
@@ -85,11 +88,24 @@ def columns():
                 max_prob_rel = max(probs, key=probs.get)
                 if rels_tup[0] == v_start and probs[max_prob_rel] > threshhold:
                     if probs[max_prob_rel] not in step_tup[1]:
-                        step_tup[1][max_prob_rel] = [pred[rels_tup[1]].text] # doc[ent_start_i]
+                        step_tup[1][max_prob_rel] = [ents_dict[rels_tup[1]]] # doc[ent_start_i]
                     else:
-                        step_tup[1][max_prob_rel].append(pred[rels_tup[1]].text)
+                        step_tup[1][max_prob_rel].append(ents_dict[rels_tup[1]])
             steps_list.append(step_tup) 
         # print(steps_list)
+
+
+        labels_dict = {
+            "ArgNone": "None",
+            "Arg0Z": "Zutat (S)",
+            "Arg0Tool": "Tool (S)",
+            "Arg1Z": "Zutat (O)",
+            "Arg1Tool": "Tool (O)",
+            "ArgPräp": "Präposition",
+            "ArgZeitp": "Zeitpunkt",
+            "ArgDauer": "Dauer",
+            "ArgTemp": "Temperatur"
+        }
 
         # --- Display NE with displacy ---
         r,g,b = "#ECC1C9", "#BCDCD0", "#C3CEEA"
@@ -112,8 +128,10 @@ def columns():
         title="Output",  
         demo_result = demo_result, 
         demo_text = plain_text,
-        steps_list = steps_list
+        steps_list = steps_list,
+        labels_dict = labels_dict,
+        ents_dict = ents_dict
         )
 
 if __name__ == "__main__":
-    app.run()#debug=True
+    app.run(debug=True)#debug=True

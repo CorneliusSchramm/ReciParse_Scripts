@@ -38,4 +38,7 @@ def read_files(file: Path, nlp: "Language") -> Iterable[Example]:
         pred.ents = gold.ents
         yield Example(pred, gold)
 
+def get_ent_from_token(token, doc):
+    return [ent for ent in doc.ents if ent.start_char <= token.idx <= ent.end_char][0]
+
 print("custom functions OK")
