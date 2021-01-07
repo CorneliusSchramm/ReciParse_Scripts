@@ -39,20 +39,20 @@
     
     <script src="{{url_for('static', filename='main.js')}}"></script>
     <!-- Function to submit text on enter -->
+
     <script>
         function pressed(e) {
             // Has the enter key been pressed?
-            if ( (window.event ? event.keyCode : e.which) == 13) { 
+            if ( e.keyCode == 13 && !e.shiftKey) { 
                 // If it has been so, manually submit the <form>
+                e.preventDefault();
                 document.forms[0].submit();
 
                 
                 var x = String(document.getElementById("input-text").value);
 
                 //document.getElementById("input").innerHTML = x;
-                document.getElementById("input-text").placeholder = x
-
-                console.log(x);
+                document.getElementById("input-text").placeholder = x;
             }
         }
     </script>

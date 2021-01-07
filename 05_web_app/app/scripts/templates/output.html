@@ -6,6 +6,15 @@
     <a class="logo" href="/"><img src="{{ url_for('static', filename = 'Unknown.png')}}"></a>
 </div>
 
+<script type="text/javascript">
+function SelectAll(id)
+{
+    var i = document.getElementById(id)
+    document.getElementById(id).focus();
+    document.getElementById(id).select();
+    i.setAttribute("onclick", "")
+}
+</script>
 
 <div class = "row" >
 
@@ -16,9 +25,10 @@
                 name = "rawtext" cols = "30" 
                 class="form-control custom-box left-box" 
                 id="input-text"
-                placeholder="Paste your recipe here and hit 'Enter' to submit"
+                placeholder="Paste your recipe here and hit 'Enter' to submit."
                 onkeydown="pressed(event)" 
-                style="height:500px; resize: none;"></textarea>
+                style="height:500px; resize: none;"
+                onclick="SelectAll('input-text');">{{rawtext}}</textarea>
         </div>
     </form>
 
@@ -35,20 +45,6 @@
             {% for step in steps_list %}
             <div class = "step">
                 <strong>{{loop.index}}. {{ step[0] }}</strong><br>
-<!-- 
-                {% for item in step[1].items()%}
-                    {% if item[0].shift|string() == 'Arg0Z' %}
-                        {{Zutaten}}:
-                    {% else %}
-                        {{item[0]}}:
-                    {% endif %}
-
-                    {% for ent in item[1]%}
-                        {{ent}} <br>
-
-                    {% endfor %}
-                {% endfor %} -->
-
 
                 {% for item in step[1].items()%}
                     {{labels_dict[item[0]]}}: 
