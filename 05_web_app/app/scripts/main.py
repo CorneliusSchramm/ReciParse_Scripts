@@ -11,14 +11,19 @@ from spacy import displacy
 # New Tokenizer
 
 # For Rel Model
-from scripts import rel_pipe
-from scripts import rel_model
-from scripts import custom_functions
+# from scripts import rel_pipe
+# from scripts import rel_model
+# from scripts import custom_functions
 
+import rel_pipe
+import rel_model
+import custom_functions
 # Load Models
 # Cocos paths
-# ner_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\NER trained on nightly\ner-cb1-159-15-12")
-# # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+ner_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\NER trained on nightly\ner-cb1-159-15-12")
+# rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\04-performance\rel-trf-01_04-coco\training\model-best")
+
 # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\16-12_relations_tok2vec")
 
 # Leos paths
@@ -27,15 +32,15 @@ from scripts import custom_functions
 #rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
 
 #make the factory work
-from scripts.rel_pipe import make_relation_extractor, score_relations
+from rel_pipe import make_relation_extractor, score_relations
 
 #make the config work
-from scripts.rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
+from rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
 
 # Jonathans paths
-ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
+# ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
 # # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
-rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
+# rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
 
 print("models loaded")
 
@@ -72,7 +77,7 @@ def columns():
         # Extract Steps from relations
         v_list = [(ent.start, ent.text) for ent in pred.ents if ent.label_ == "V" ]
 
-        threshhold = 0.15
+        threshhold = 0.05
         steps_list = []
         for v_start, v in v_list:
             step_tup = (v,{})
@@ -93,7 +98,7 @@ def columns():
             "V": r, 
             "Z":g, "TOOL": g, 
             "TEMP": b, "ATTR": b, "PRÄP":  b, "ZEITP": b, "DAUER": b, 
-}
+        }
             
         my_options = {"ents": ["V","Z", "TOOL", "TEMP", "ATTR","ZEITP","DAUER", "PRÄP" ], "colors": colors}
         demo_html = displacy.render(pred, style= "ent", options=my_options)
@@ -111,4 +116,4 @@ def columns():
         )
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()#debug=True
