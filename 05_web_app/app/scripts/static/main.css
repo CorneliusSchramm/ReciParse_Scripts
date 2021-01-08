@@ -1,3 +1,8 @@
+#input-text::selection {
+  background-color: rgba(52, 86, 114,0.1);
+  border-radius: 100px;
+  }
+
 body {
     background: #FBFAF8;
     /*min-height: 100%;*/
