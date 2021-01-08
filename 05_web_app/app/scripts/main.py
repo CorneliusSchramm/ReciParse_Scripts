@@ -18,6 +18,9 @@ from spacy import displacy
 import rel_pipe
 import rel_model
 import custom_functions
+
+# import spacy_transformers
+
 # Load Models
 # Cocos paths
 #ner_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\NER trained on nightly\ner-cb1-159-15-12")
@@ -26,18 +29,22 @@ import custom_functions
 
 # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\16-12_relations_tok2vec")
 
-# Leos paths
+# Leo
+ner_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
+# rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+# rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
+rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/04-performance/rel-trf-01_04-coco/training/model-best")
+
 # ner_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
 # # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
 # rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
 # rel_nlp = spacy.load(r"/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/04-performance/rel-trf-01_04-coco/training/model-best")
-#make the factory work
 
 # Jonathans paths
-ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
-# # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
-#rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
-rel_nlp = spacy.load(r"/Users/jonathanebner/Desktop/app_transformer/model/rel_trans")
+# ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
+# # # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
+# #rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
+# rel_nlp = spacy.load(r"/Users/jonathanebner/Desktop/app_transformer/model/rel_trans")
 print("models loaded")
 
 
@@ -60,8 +67,9 @@ def home():
 @app.route("/output", methods= ["GET", "POST"])
 def columns():
     #if request.method == "POST":
+        rawtext = ""
         rawtext = request.form["rawtext"]
-
+            
         # --- Spacy 3 with rel ---
 
         # Get NE predictions
@@ -79,7 +87,7 @@ def columns():
         ents_dict = { ent.start: ent.text for ent in pred.ents}
         print(ents_dict, "\n")
 
-        threshhold = 0.15
+        threshhold = 0.5
         steps_list = []
         for v_start, v in v_list:
             step_tup = (v,{})

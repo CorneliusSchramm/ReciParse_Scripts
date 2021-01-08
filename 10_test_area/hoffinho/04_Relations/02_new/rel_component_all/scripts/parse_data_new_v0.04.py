@@ -134,7 +134,9 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                         else: 
                                             if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= TOKEN_LENGTH:  #filter token distance (match with config?)
                                                 rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
-        
+
+                    print(rels)
+
                     relations = example["relations"]    #relations is list of dict
                     for relation in relations:
                         # the 'head' and 'child' annotations refer to the end token in the span
