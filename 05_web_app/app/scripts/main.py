@@ -36,8 +36,8 @@ import custom_functions
 # Jonathans paths
 ner_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/NER trained on nightly/ner-cb1-159-15-12")
 # # rel_nlp = spacy.load(r"C:\Users\CocoL\Universität St.Gallen\STUD-Capstoneproject Tell 6 - General\02-Coding\03-Models\Relations\0-trained-on-djx\model-best")
-rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
-#rel_nlp = spacy.load(r"/Users/jonathanebner/Desktop/app_transformer/model/rel_trans")
+#rel_nlp = spacy.load(r"/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/03-Models/Relations/16-12_relations_tok2vec")
+rel_nlp = spacy.load(r"/Users/jonathanebner/Desktop/app_transformer/model/rel_trans")
 print("models loaded")
 
 
@@ -59,7 +59,7 @@ def home():
 
 @app.route("/output", methods= ["GET", "POST"])
 def columns():
-    if request.method == "POST":
+    #if request.method == "POST":
         rawtext = request.form["rawtext"]
 
         # --- Spacy 3 with rel ---
@@ -100,7 +100,8 @@ def columns():
             "ArgPräp": "Präposition",
             "ArgZeitp": "Zeitpunkt",
             "ArgDauer": "Dauer",
-            "ArgTemp": "Temperatur"
+            "ArgTemp": "Temperatur",
+            "ArgAttr": "Attribut"
         }
 
         # --- Display NE with displacy ---
@@ -119,16 +120,16 @@ def columns():
         # Just Display regular text
         plain_text = pred.text
 
-    return render_template(
-        "output.html", 
-        title="Output",  
-        demo_result = demo_result, 
-        demo_text = plain_text,
-        steps_list = steps_list,
-        labels_dict = labels_dict,
-        ents_dict = ents_dict,
-        rawtext = rawtext
-        )
+        return render_template(
+            "output.html", 
+            title="Output",  
+            demo_result = demo_result, 
+            demo_text = plain_text,
+            steps_list = steps_list,
+            labels_dict = labels_dict,
+            ents_dict = ents_dict,
+            rawtext = rawtext
+            )
 
 if __name__ == "__main__":
     app.run(debug=True)#debug=True
