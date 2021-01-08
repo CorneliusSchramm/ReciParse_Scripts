@@ -52,7 +52,7 @@ function SelectAll(id)
                     {% for ent in item[1]%}
                         {{ent}}
                         {% if not loop.last %}
-                            {{","}}
+                            {{"/"}}
                         {% endif %}
 
                     {% endfor %} <br>
