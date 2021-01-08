@@ -66,30 +66,39 @@ def columns():
 
         # Get NE predictions
         pred = ner_nlp(rawtext)
+        print(pred)
 
         # Get Relation predictions
         for name, proc in rel_nlp.pipeline:
             pred = proc(pred)
+            print(pred)
 
         # Extract Steps from relations
         v_list = [(ent.start, ent.text) for ent in pred.ents if ent.label_ == "V" ]
         
         ents_dict = { ent.start: ent.text for ent in pred.ents}
+        print(ents_dict, "\n")
 
-        threshhold = 0.05
+        threshhold = 0.15
         steps_list = []
         for v_start, v in v_list:
             step_tup = (v,{})
             for rels_tup, probs in pred._.rel.items():
+                # print("rels_tup: ", rels_tup, "probs: ", probs, "\n")
                 max_prob_rel = max(probs, key=probs.get)
+                # print("max_prob_rel:", max_prob_rel)
                 if rels_tup[0] == v_start and probs[max_prob_rel] > threshhold:
-                    if probs[max_prob_rel] not in step_tup[1]:
+                    # print("rels_tup[0]:", rels_tup[0], " v_start:", v_start)
+                    if max_prob_rel not in step_tup[1].keys():
+                        # print("probs[max_prob_rel]:", probs[max_prob_rel], "step_tup[1]:", step_tup[1])
                         step_tup[1][max_prob_rel] = [ents_dict[rels_tup[1]]] # doc[ent_start_i]
+                        # print("step_tup[1]:", step_tup[1])
                     else:
                         step_tup[1][max_prob_rel].append(ents_dict[rels_tup[1]])
+                        # print("else")
             steps_list.append(step_tup) 
         # print(steps_list)
-
+        print(steps_list)
 
         labels_dict = {
             "ArgNone": "None",

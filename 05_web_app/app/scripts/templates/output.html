@@ -50,9 +50,12 @@ function SelectAll(id)
                     {{labels_dict[item[0]]}}: 
                     <!-- {{item}} -->
                     {% for ent in item[1]%}
-                        {{ent}} <br>
+                        {{ent}}
+                        {% if not loop.last %}
+                            {{","}}
+                        {% endif %}
 
-                    {% endfor %}
+                    {% endfor %} <br>
                 {% endfor %}
                 
             </div>
