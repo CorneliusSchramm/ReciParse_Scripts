@@ -20,15 +20,9 @@
 
     ],
     "relation_extractor":[
-      "Arg0Z",
-      "Arg0Tool",
-      "Arg1Z",
-      "Arg1Tool",
-      "ArgAttr",
-      "ArgTemp",
-      "ArgDauer",
-      "ArgZeitp",
-      "ArgPr\u00e4p"
+      "Arg0",
+      "Arg1",
+      "Arg"
     ]
   },
   "pipeline":[
@@ -43,10 +37,10 @@
 
   ],
   "performance":{
-    "rel_micro_p":0.5809414466,
-    "rel_micro_r":0.4538116592,
-    "rel_micro_f":0.5095669688,
-    "tok2vec_loss":26.7908018506,
-    "relation_extractor_loss":54.6791615337
+    "rel_micro_p":0.5507246377,
+    "rel_micro_r":0.0884955752,
+    "rel_micro_f":0.1524879615,
+    "tok2vec_loss":0.2401620309,
+    "relation_extractor_loss":9.4827493932
   }
 }
