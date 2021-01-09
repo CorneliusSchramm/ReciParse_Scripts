@@ -28,6 +28,7 @@ workflows:
     - data
     - train_cpu
     - evaluate
+    - evaluate_custom
   all_gpu:
     - data
     - train_gpu
@@ -73,6 +74,14 @@ commands:
     help: "Apply the best model to new, unseen text, and measure accuracy at different thresholds."
     script:
       - "python ./scripts/evaluate.py ${vars.trained_model} ${vars.test_file} False"
+    deps:
+      - ${vars.trained_model}
+      - ${vars.test_file}
+  
+  - name: "evaluate_custom"
+    help: "Apply the best model to new, unseen text, and measure accuracy at different thresholds."
+    script:
+      - "python ./scripts/evaluate_custom.py ${vars.trained_model} ${vars.test_file} False"
     deps:
       - ${vars.trained_model}
       - ${vars.test_file}

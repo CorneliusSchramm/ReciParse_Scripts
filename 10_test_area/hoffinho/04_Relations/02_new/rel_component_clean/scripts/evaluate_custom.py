@@ -32,6 +32,7 @@ def main(trained_pipeline: Path, test_data: Path, print_details: bool):
         for el in pred: 
             print(el)
         
+        print("-----")
         for el in gold: 
             print(el)
         
