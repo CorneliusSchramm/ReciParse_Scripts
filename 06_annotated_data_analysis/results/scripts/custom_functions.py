@@ -7,10 +7,10 @@ from spacy.training import Example
 from spacy.tokens import DocBin, Doc
 
 # make the factory work
-from scripts.rel_pipe import make_relation_extractor
+from rel_pipe import make_relation_extractor
 
 # make the config work
-from scripts.rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
+from rel_model import create_relation_model, create_classification_layer, create_instances, create_tensors
 
 # Eingefügt für tokenizer:
 @spacy.registry.callbacks("customize_language_data")
