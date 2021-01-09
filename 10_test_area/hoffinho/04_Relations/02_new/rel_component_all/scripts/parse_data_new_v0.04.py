@@ -135,7 +135,8 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                             if abs(ents_dict[x1][1] - ents_dict[x2][1]) <= TOKEN_LENGTH:  #filter token distance (match with config?)
                                                 rels[(x1, x2)] = {}         #every possible span combination becomes key for individual dict (1,1), (1,2) ...
 
-                    print(rels)
+                    #print(rels)
+                    #print("No error until line 139")
 
                     relations = example["relations"]    #relations is list of dict
                     for relation in relations:
@@ -148,11 +149,23 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         #DETAILED_ARGS 1a
                         if DETAILED_ARGS == True:
                             if label == "ARG0": 
-                                label = MAP_LABELS_ARG0[ents_dict[end][0]]  #assign new label based on span type
+                                if ents_dict[end][0] not in ["Z", "TOOL"]:
+                                    label = MAP_LABELS_ARG[ents_dict[end][0]]
+                                else:
+                                    label = MAP_LABELS_ARG0[ents_dict[end][0]]  #assign new label based on span type
                             elif label == "ARG1":
-                                label = MAP_LABELS_ARG1[ents_dict[end][0]]
+                                if ents_dict[end][0] not in ["Z", "TOOL"]:
+                                    label = MAP_LABELS_ARG[ents_dict[end][0]]
+                                else:
+                                    label = MAP_LABELS_ARG1[ents_dict[end][0]]
                             elif label == "ARG":
-                                label = MAP_LABELS_ARG[ents_dict[end][0]] 
+                                if ents_dict[end][0] in ["Z", "TOOL"]:
+                                    if ents_dict[end][0] == "Z":
+                                        label = "Arg0Z"
+                                    elif ents_dict[end][0] == "TOOL":
+                                        label = "Arg1Tool"
+                                else:
+                                    label = MAP_LABELS_ARG[ents_dict[end][0]] 
                             else: 
                                 error_count_rel += 1 
                         #DETAILED_ARGS 1b
@@ -168,6 +181,8 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                         except:                                     
                             long_rel_count +=1                              #error only if relation exists in annotation but isn't a valid token combi (too long/not starting from verb)
                             pass
+                    
+                    #print("No error until line 172")
 
                     # The annotation is complete, so fill in zero's where the data is missing
                     for x1 in span_starts:
@@ -248,6 +263,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, dev_
                                                         neg += 1                            
                                                         rels[(x1, x2)][label] = 0.0   
                     
+                    #print("No error until line 254")
 
                     print(rels)
                     doc._.rel = rels                                    # rels = {(1,1): {Arg0 : 1, Arg1 : 0, Arg : 0}, (1,2): {Arg0 : 0, ...}}
