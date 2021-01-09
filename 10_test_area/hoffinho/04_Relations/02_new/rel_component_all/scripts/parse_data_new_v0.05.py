@@ -14,8 +14,8 @@ msg = Printer()
 ## Token Length (auch in rel_model & config anpassen)
 TOKEN_LENGTH = 30           #to front and back
 DIFF_FRONT_BACK = True      #Differentiate between token distance front and back? (auch in rel_model anpassen)
-FRONT = 10                  #vor Verb in Richtung Satzende
-BACK = 30                   #hinter verb in Richtung Satzanfang
+FRONT = 5                  #vor Verb in Richtung Satzende
+BACK = 20                   #hinter verb in Richtung Satzanfang
 
 ## Entity Type and Args
 VERBS_TO_OTHER = True       #auch in rel_model anpassen
