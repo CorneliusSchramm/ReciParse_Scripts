@@ -17,9 +17,9 @@ function SelectAll(id)
 </script>
 
 <div class = "row" >
-
     <!-- Linke Spalte -->
     <form  class="col-3" method = "POST" action = "\output">
+        <h6 class="headings"> Input Recipe </h6>
         <div>
             <textarea 
                 name = "rawtext" cols = "30" 
@@ -34,6 +34,7 @@ function SelectAll(id)
 
     <!-- Mittlere Spalte -->
     <div class = "col-6" >
+        <h6 class="headings"> Entities </h6>
         <div class="custom-box">
             {{ demo_result|markdown }} 
         </div>
@@ -41,6 +42,7 @@ function SelectAll(id)
 
     <!-- Rechte Spalte -->
     <div class = "col-3">
+        <h6 class="headings"> Steps </h6>
         <div class="custom-box right-box">
             {% for step in steps_list %}
             <div class = "step">
