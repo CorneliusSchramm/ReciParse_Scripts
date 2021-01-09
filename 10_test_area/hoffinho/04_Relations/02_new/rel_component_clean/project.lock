@@ -8,11 +8,11 @@ data:
       md5: 5c280e8458bb589343a04597efc19409
   outs:
     - path: data/train.spacy
-      md5: 5a8462451f6572f8ed6e14ab0d441c1b
+      md5: 16e5871a43efbaec75585bf406ef1908
     - path: data/dev.spacy
-      md5: 1c03d6bea22167f51b0fca6dd482c284
+      md5: 9d268f93ec854d7e31b780167ca21d33
     - path: data/test.spacy
-      md5: 16009e0990865c93579abb5c0524fcbf
+      md5: f2df9461dc779631df568f9d280acaf5
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 train_cpu:
@@ -22,12 +22,12 @@ train_cpu:
       data/train.spacy --paths.dev data/dev.spacy -c ./scripts/custom_functions.py
   deps:
     - path: data/train.spacy
-      md5: 8a6e7d17884f2b6c15ec5f18bb27b47e
+      md5: 0313ef29692853cc75e4bbaec9ac3135
     - path: data/dev.spacy
-      md5: e2573a8bedf18984f956d3e57959a138
+      md5: 547a7abfc0705ca084a1b0822c6b53a3
   outs:
     - path: training/model-best
-      md5: b7dc6d370ed908e08ddd31d807442da9
+      md5: 57b9e779be3873f18323970c90c248f5
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 evaluate:
@@ -36,24 +36,21 @@ evaluate:
     - python ./scripts/evaluate.py training/model-best data/test.spacy False
   deps:
     - path: training/model-best
-      md5: 49e6ecf2d38eefc66fd05e4131273d77
+      md5: 57b9e779be3873f18323970c90c248f5
     - path: data/test.spacy
-      md5: 2e4c8285d64fb5c6f002dec13c728fc1
+      md5: 7a2ba43ee735963e667153acee3c4cb3
   outs: []
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
-format:
-  cmd: python -m spacy run format
+evaluate_custom:
+  cmd: python -m spacy run evaluate_custom
   script:
-    - python ./scripts/lc_prodigy_format.py /Users/jhoff/Desktop/model-best-ner training/model-best
-      assets/input1.json
+    - python ./scripts/evaluate_custom.py training/model-best data/test.spacy False
   deps:
-    - path: /Users/jhoff/Desktop/model-best-ner
-      md5: 6953ee4b22870ba50bbaa04a27419db9
     - path: training/model-best
-      md5: 94fbc76354261a9ce1a0b1db1b9dd537
-    - path: assets/input1.json
-      md5: ed3dbb2cd5c4ea95a941ccc66f258d4a
+      md5: 3c8a155db98e33aafc3991bc69308596
+    - path: data/test.spacy
+      md5: f3896772a10716b0a3855c41981ecc26
   outs: []
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435

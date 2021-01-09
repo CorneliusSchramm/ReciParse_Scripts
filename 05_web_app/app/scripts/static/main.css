@@ -143,3 +143,8 @@ img {
 .get-lucky:active {
   color: rgba(52, 86, 114,0.75);
 }
+
+.headings{
+  color:#345672;
+  margin-left: 20px;
+}
