@@ -7,8 +7,8 @@ from thinc.api import Model, Linear, chain, Logistic
 
 # Filter
 DIFF_FRONT_BACK = True      #Differentiate between token distance front and back?
-FRONT = 50                  #vor Verb in Richtung Satzende
-BACK = 50                   #hinter verb in Richtung Satzanfang
+FRONT = 20                  #vor Verb in Richtung Satzende
+BACK = 20                   #hinter verb in Richtung Satzanfang
 VERBS_TO_OTHER = False 
 
 
