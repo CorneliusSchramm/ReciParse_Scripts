@@ -293,7 +293,6 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, test
     for num in range(1,11):         #docs["train"] = list
         ind_cut = round(len(docs["train"]) * num/10)
         d = docs["train"][0:ind_cut]
-        print(len(d))
 
         str = f"data/train{num}.spacy"
         path = Path(str)
@@ -301,14 +300,8 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, test
         docbin = DocBin(docs=d, store_user_data=True)
         docbin.to_disk(path)
 
+        msg.info(f"{len(d)} train recipes in {str}.")
 
-
-    # docbin = DocBin(docs=docs["train"], store_user_data=True)
-    # docbin.to_disk(train_file)
-    # msg.info(
-    #     f"{len(docs['train'])} training recipes from {len(ids['train'])} unique recipes, "
-    #     f"{count_pos['train']}/{count_all['train']} pos instances."
-    # )
 
     docbin = DocBin(docs=docs["dev"], store_user_data=True)
     docbin.to_disk(dev_file)
