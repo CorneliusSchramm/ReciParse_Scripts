@@ -292,11 +292,14 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, test
 
     for num in range(1,11):         #docs["train"] = list
         ind_cut = round(len(docs["train"]) * num/10)
-        d = docs["train"][0:ind_cut+1]
+        d = docs["train"][0:ind_cut]
         print(len(d))
 
+        str = f"data/train{num}.spacy"
+        path = Path(str)
+
         docbin = DocBin(docs=d, store_user_data=True)
-        docbin.to_disk(train_file + str(num))
+        docbin.to_disk(path)
 
 
 
