@@ -14,12 +14,12 @@ msg = Printer()
 ## Token Length (auch in rel_model & config anpassen)
 TOKEN_LENGTH = 300           #to front and back
 DIFF_FRONT_BACK = True      #Differentiate between token distance front and back? (auch in rel_model anpassen)
-FRONT = 5                  #vor Verb in Richtung Satzende
-BACK = 20                   #hinter verb in Richtung Satzanfang
+FRONT = 100                  #vor Verb in Richtung Satzende
+BACK = 100                   #hinter verb in Richtung Satzanfang
 
 ## Entity Type and Args
-VERBS_TO_OTHER = True       #auch in rel_model anpassen
-DETAILED_ARGS = True
+VERBS_TO_OTHER = False       #auch in rel_model anpassen
+DETAILED_ARGS = False
 
 
 
@@ -290,12 +290,22 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, test
     
     msg.info(f"{long_rel_count} relations have been cut because tokens are too far apart.")
 
-    docbin = DocBin(docs=docs["train"], store_user_data=True)
-    docbin.to_disk(train_file)
-    msg.info(
-        f"{len(docs['train'])} training recipes from {len(ids['train'])} unique recipes, "
-        f"{count_pos['train']}/{count_all['train']} pos instances."
-    )
+    for num in range(1,11):         #docs["train"] = list
+        ind_cut = round(len(docs["train"]) * num/10)
+        d = docs["train"][0:ind_cut+1]
+        print(len(d))
+
+        docbin = DocBin(docs=d, store_user_data=True)
+        docbin.to_disk(train_file + str(num))
+
+
+
+    # docbin = DocBin(docs=docs["train"], store_user_data=True)
+    # docbin.to_disk(train_file)
+    # msg.info(
+    #     f"{len(docs['train'])} training recipes from {len(ids['train'])} unique recipes, "
+    #     f"{count_pos['train']}/{count_all['train']} pos instances."
+    # )
 
     docbin = DocBin(docs=docs["dev"], store_user_data=True)
     docbin.to_disk(dev_file)

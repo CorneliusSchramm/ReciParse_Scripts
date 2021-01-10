@@ -37,10 +37,10 @@
 
   ],
   "performance":{
-    "rel_micro_p":0.5523156089,
-    "rel_micro_r":0.3105110897,
-    "rel_micro_f":0.3975308642,
-    "tok2vec_loss":1.7760263632,
-    "relation_extractor_loss":13.0089242365
+    "rel_micro_p":0.4380032206,
+    "rel_micro_r":0.126335346,
+    "rel_micro_f":0.1961067051,
+    "tok2vec_loss":0.0920134651,
+    "relation_extractor_loss":6.4023269136
   }
 }
