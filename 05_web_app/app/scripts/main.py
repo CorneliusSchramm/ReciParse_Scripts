@@ -74,18 +74,18 @@ def columns():
 
         # Get NE predictions
         pred = ner_nlp(rawtext)
-        print(pred)
+        # print(pred)
 
         # Get Relation predictions
         for name, proc in rel_nlp.pipeline:
             pred = proc(pred)
-            print(pred)
+            # print(pred)
 
         # Extract Steps from relations
         v_list = [(ent.start, ent.text) for ent in pred.ents if ent.label_ == "V" ]
         
         ents_dict = { ent.start: ent.text for ent in pred.ents}
-        print(ents_dict, "\n")
+        # print(ents_dict, "\n")
 
         threshhold = 0.5
         steps_list = []
@@ -106,7 +106,6 @@ def columns():
                         # print("else")
             steps_list.append(step_tup) 
         # print(steps_list)
-        print(steps_list)
 
         labels_dict = {
             "ArgNone": "None",

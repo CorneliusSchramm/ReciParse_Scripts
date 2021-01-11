@@ -3,10 +3,10 @@ import json
 
 
 # Pfad to json/jsonl, dass ausgebessert werden soll
-input_path = "/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/01-Data/12_annotated_batches/combined/batch1+2/batch1+2_all_f.jsonl"
+input_path = "/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/01-Data/20_overlap/batch1_coco_overlap.jsonl"
 
 #Pfad für output json
-output_path = "/Users/leonidas/OneDrive - Universität St.Gallen/General/02-Coding/01-Data/12_annotated_batches/combined/batch1+2/batch1+2_all_fi.jsonl"
+output_path = "/Users/jonathanebner/Universität St.Gallen/STUD-Capstoneproject Tell 6 - General/02-Coding/01-Data/20_overlap/batch1_coco_overlap_a.jsonl"
 
 
 with open(input_path, "r", encoding="utf8") as json_file:
@@ -14,6 +14,7 @@ with open(input_path, "r", encoding="utf8") as json_file:
 
 
 data = pd.DataFrame(annotated_recipes)
+print(data[0])
 
 
 for index, row in data.iterrows():
