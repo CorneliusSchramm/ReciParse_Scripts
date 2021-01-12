@@ -1,0 +1,52 @@
+{
+  "lang":"de",
+  "name":"pipeline",
+  "version":"0.0.0",
+  "spacy_version":">=3.0.0rc2,<3.1.0",
+  "description":"",
+  "author":"",
+  "email":"",
+  "url":"",
+  "license":"",
+  "spacy_git_version":"ace6ae435",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null
+  },
+  "labels":{
+    "transformer":[
+
+    ],
+    "relation_extractor":[
+      "Arg0Z",
+      "Arg0Tool",
+      "Arg1Z",
+      "Arg1Tool",
+      "ArgAttr",
+      "ArgTemp",
+      "ArgDauer",
+      "ArgZeitp",
+      "ArgPr\u00e4p"
+    ]
+  },
+  "pipeline":[
+    "transformer",
+    "relation_extractor"
+  ],
+  "components":[
+    "transformer",
+    "relation_extractor"
+  ],
+  "disabled":[
+
+  ],
+  "performance":{
+    "rel_micro_p":0.7644110276,
+    "rel_micro_r":0.7290836653,
+    "rel_micro_f":0.7463295269,
+    "transformer_loss":8.0217844453,
+    "relation_extractor_loss":8.9011562839
+  }
+}
