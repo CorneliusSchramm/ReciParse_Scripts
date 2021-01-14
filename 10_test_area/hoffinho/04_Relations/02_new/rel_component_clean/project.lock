@@ -1,18 +1,18 @@
 data:
   cmd: python -m spacy run data
   script:
-    - python ./scripts/parse_data_partitionierung.py /Users/jhoff/Desktop/batch2all_all_f.jsonl
+    - python ./scripts/parse_data_new_v0.05.py /Users/jhoff/Desktop/batch2all_all_f.jsonl
       data/train.spacy data/dev.spacy data/test.spacy
   deps:
     - path: /Users/jhoff/Desktop/batch2all_all_f.jsonl
       md5: 5c280e8458bb589343a04597efc19409
   outs:
     - path: data/train.spacy
-      md5: null
+      md5: 9673ae2ea5eb242bbdd61a89849d95fe
     - path: data/dev.spacy
-      md5: 3bd9d133fcc602c77b21b75fa3197399
+      md5: 4674f2321cc7050a543c45e9ae40735b
     - path: data/test.spacy
-      md5: f57c85a40cf610416352b016ddc1f3ca
+      md5: a91b7b7d36d00a15a54cb4386dd197f7
   spacy_version: 3.0.0rc2
   spacy_git_version: ace6ae435
 train_cpu:

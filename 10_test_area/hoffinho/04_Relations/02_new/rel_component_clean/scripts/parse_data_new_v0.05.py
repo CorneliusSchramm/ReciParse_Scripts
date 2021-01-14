@@ -14,7 +14,7 @@ msg = Printer()
 ## Token Length (auch in rel_model & config anpassen)
 TOKEN_LENGTH = 300           #to front and back
 DIFF_FRONT_BACK = True      #Differentiate between token distance front and back? (auch in rel_model anpassen)
-FRONT = 5                  #vor Verb in Richtung Satzende
+FRONT = 2                  #vor Verb in Richtung Satzende
 BACK = 20                   #hinter verb in Richtung Satzanfang
 
 ## Entity Type and Args
@@ -260,7 +260,7 @@ def main(json_loc: Path, train_file: Path, dev_file: Path, test_file: Path, test
                                                         rels[(x1, x2)][label] = 0.0   
                     
 
-                    #print(rels)
+                    print(rels)
                     doc._.rel = rels                                    # rels = {(1,1): {Arg0 : 1, Arg1 : 0, Arg : 0}, (1,2): {Arg0 : 0, ...}}
 
                     # only keeping documents with at least 1 positive case (if doc isn't annotated relations = empty list)
