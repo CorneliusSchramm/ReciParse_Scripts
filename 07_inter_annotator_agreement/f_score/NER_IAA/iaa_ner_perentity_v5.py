@@ -9,7 +9,7 @@ from spacy.vocab import Vocab
 vocab = Vocab()
 scorer = Scorer()
 
-entity_to_compare = ["Z"]
+entity_to_compare = ["TOOL"]
 # ["Z", "TOOL", "V", "ATTR", "ZEITP", "DAUER", "TEMP", "PRÄP"]
 
 
