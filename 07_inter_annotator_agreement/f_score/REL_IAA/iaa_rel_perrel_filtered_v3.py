@@ -9,7 +9,7 @@ from spacy.vocab import Vocab
 vocab = Vocab()
 scorer = Scorer()
 
-rels_to_compare = ["ARG"]
+rels_to_compare = ["ARG0", "ARG1", "ARG"]
 # ["ARG0", "ARG1", "ARG"]
 
 # path to jsonl overlap files
@@ -178,6 +178,6 @@ average_f = sum([inf_per_comparison[key]["F-Score"] for key in inf_per_compariso
 
 print("")
 print(f"####   Overall filtered {rels_to_compare} statistics   ####")
-print(f"Average Precision: {round(average_p, 3)}")
-print(f"Average Recall   : {round(average_r, 3)}")
-print(f"Average F-score  : {round(average_f, 3)}")
+print(f"Average Precision: {round(average_p, 4)}")
+print(f"Average Recall   : {round(average_r, 4)}")
+print(f"Average F-score  : {round(average_f, 4)}")

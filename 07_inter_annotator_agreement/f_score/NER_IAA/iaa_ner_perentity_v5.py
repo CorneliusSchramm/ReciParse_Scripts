@@ -9,7 +9,7 @@ from spacy.vocab import Vocab
 vocab = Vocab()
 scorer = Scorer()
 
-entity_to_compare = ["TOOL"]
+entity_to_compare = ["Z", "TOOL", "V", "ATTR", "ZEITP", "DAUER", "TEMP", "PRÄP"]
 # ["Z", "TOOL", "V", "ATTR", "ZEITP", "DAUER", "TEMP", "PRÄP"]
 
 
@@ -157,6 +157,6 @@ average_f = sum([inf_per_comparison[key]["F-Score"] for key in inf_per_compariso
 
 print("")
 print(f"####   Overall {entity_to_compare} statistics   ####")
-print(f"Average Precision: {round(average_p, 3)}")
-print(f"Average Recall   : {round(average_r, 3)}")
-print(f"Average F-score  : {round(average_f, 3)}")
+print(f"Average Precision: {round(average_p, 4)}")
+print(f"Average Recall   : {round(average_r, 4)}")
+print(f"Average F-score  : {round(average_f, 4)}")
